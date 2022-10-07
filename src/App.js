@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     user: null,
     showLogin: true,
+    loggedIn: false
 
   }
   
@@ -29,6 +30,14 @@ class App extends Component {
   setUserInState = (incomingUserData) => {
     this.setState({ user: incomingUserData})
   }
+
+  logout = () => {
+
+    localStorage.removeItem('token')
+    let user = null
+    this.setState({user})
+  }
+
   
   render() {
     return (
@@ -37,18 +46,40 @@ class App extends Component {
             <a className="navbar-brand" href="#">Navbar</a>
             <div>
             <div class="navbarNav">
+              {this.state.user ?
                 <ul class="navbar-nav">
                 <li class="nav-item active">
                   <a className="nav-link"
-                  onClick={() => { this.setState({showLogin: true})}}
+                      onClick={async () => {
+                        await this.setState({ showLogin: true })
+                        await this.setState({loggedIn: false})
+                        this.logout()
+                      }}
+                  >LogOut</a>
+                </li>
+                </ul>
+                : 
+                <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a className="nav-link"
+                      onClick={async () => {
+                        await this.setState({ showLogin: true })
+                         this.setState({loggedIn: true})
+                      }}
                   >LogIn</a>
                 </li>
                 <li class="nav-item">
                   <a className="nav-link"
-                    onClick={() => { this.setState({showLogin: false})}}
+                      onClick={async () => {
+                        await this.setState({ showLogin: false })
+                         this.setState({loggedIn: true})
+
+                      }}
                   >Signup</a>
                 </li>
                 </ul>
+              }
+                
             </div> 
             </div>
         </nav>
