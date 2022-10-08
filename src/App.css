@@ -4,6 +4,11 @@
   background-image: linear-gradient(251deg, #FFFFFF 0%, #62ffe7 50%, #FF0000 100%);
 }
 
+a {
+  text-decoration: none;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

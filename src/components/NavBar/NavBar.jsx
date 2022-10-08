@@ -1,9 +1,10 @@
 import { Component } from "react";
-
+import { Link } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import './NavBar.css'
 
 export default class NavBar extends Component {
     render() {
@@ -18,24 +19,45 @@ export default class NavBar extends Component {
               {userState ?
                 <Nav className="me-auto">
                 <NavDropdown title="Hunt Overview" id="basic-nav-dropdown">
-                    <NavDropdown.Item>Interested</NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="/interested" className='rm-underline'>
+                      Interested
+                    </Link>
+                  </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.2">
+                  <NavDropdown.Item>
+                  <Link to="/applied" className='rm-underline'>
                       Applied
+                    </Link>
+                      
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.3">Interviewing</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">
+                    
+                    <Link to="/interviewing" className='rm-underline'>
+                    Interviewing
+                    </Link>
+                  </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Offer
+                  <NavDropdown.Item>
+                  <Link to="/offer" className='rm-underline'>
+                    Offer
+                    </Link>
+                
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Accepted
+                  <NavDropdown.Item href="#action/3.4">
+                  <Link to="/accepted" className='rm-underline'>
+                  Accepted
+                    </Link>
+                
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">
-                Summary
+                  <NavDropdown.Item href="#action/3.4">
+                  <Link to="/summary" className='rm-underline'>
+                  Summary
+                    </Link>
+                
                     </NavDropdown.Item>
                     
                   </NavDropdown>
