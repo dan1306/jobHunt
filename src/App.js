@@ -1,7 +1,10 @@
 import './App.css';
 import { Component } from 'react';
 import AuthPage from './pages/AuthPage/AuthPage';
-import NavBar from './components/NavBar/NavBar';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 class App extends Component {
@@ -42,47 +45,57 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="#">Navbar</a>
-            <div>
-            <div class="navbarNav">
+        
+        <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
               {this.state.user ?
-                <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a className="nav-link"
-                      onClick={async () => {
+                <Nav className="me-auto">
+                  <Nav.Link href="#home"
+                   onClick={async () => {
                         await this.setState({ showLogin: true })
                         await this.setState({loggedIn: false})
                         this.logout()
-                      }}
-                  >LogOut</a>
-                </li>
-                </ul>
-                : 
-                <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a className="nav-link"
-                      onClick={async () => {
-                        await this.setState({ showLogin: true })
-                         this.setState({loggedIn: true})
-                      }}
-                  >LogIn</a>
-                </li>
-                <li class="nav-item">
-                  <a className="nav-link"
-                      onClick={async () => {
+                    }}
+                    
+                  
+                  >
+                    LogOut
+                  </Nav.Link>
+                </Nav>
+                  :
+
+                <Nav className="me-auto">
+                  <Nav.Link
+                   onClick={async () => {
                         await this.setState({ showLogin: false })
                          this.setState({loggedIn: true})
 
                       }}
-                  >Signup</a>
-                </li>
-                </ul>
+                  >
+                    Signup
+                  </Nav.Link>
+                  <Nav.Link
+                  onClick={async () => {
+                        await this.setState({ showLogin: true })
+                         this.setState({loggedIn: true})
+                      }}
+                  >
+                    LogIn
+                  </Nav.Link>
+                </Nav>
+
               }
-                
-            </div> 
-            </div>
-        </nav>
+            
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+
+       
+
+  
         
         {this.state.user ?
          <header className="App-header"> <h1> Hi </h1> </header> 
