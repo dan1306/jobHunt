@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 import AuthPage from './pages/AuthPage/AuthPage';
 import NavBar from './components/NavBar/NavBar';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import IndexPage from './pages/IndexPage/IndexPage'
+import Summary from './pages/Summary/Summary'
+import Interested from './pages/Interested/Interested'
+import Applied from './pages/Applied/Applied'
+import Interviewing from './pages/Interviewing/Interviewing'
+import Accepted from './pages/Accepted/Accepted'
+import Offer from './pages/Offer/Offer'
 
 class App extends Component {
 
@@ -62,7 +67,14 @@ class App extends Component {
           
           <Routes>
             
-            <Route path="*" element={<Navigate to="/home" replace />} />
+            <Route path="/summary" element={<Summary />} />
+            <Route path="/interested" element={<Interested />} />
+            <Route path="/applied" element={<Applied/>} />
+            <Route path="/interviewing" element={<Interviewing />} />
+            <Route path="/accepted" element={<Accepted />} />
+            <Route path="/offer" element={<Offer />} />
+            
+            <Route path="*" element={<Navigate to="/summary" replace />} />
 
 
           </Routes>
