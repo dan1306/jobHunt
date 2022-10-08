@@ -1,11 +1,9 @@
 import './App.css';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import AuthPage from './pages/AuthPage/AuthPage';
+import NavBar from './components/NavBar/NavBar';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import IndexPage from './pages/IndexPage/IndexPage'
-import NavBar from './components/NavBar/NavBar';
-
-
 
 class App extends Component {
 
@@ -61,9 +59,14 @@ class App extends Component {
         <NavBar userState={this.state.user} logout= {this.logout} Signup ={this.Signup} LogIn= {this.LogIn} />
         
         {this.state.user ?
+          
+          <Routes>
+            
+            <Route path="*" element={<Navigate to="/home" replace />} />
 
 
-          <IndexPage />
+          </Routes>
+          
 
           : 
           <AuthPage showLogin = {this.state.showLogin}  setUserInState={this.setUserInState} />
