@@ -9,6 +9,9 @@ import Applied from './pages/Applied/Applied'
 import Interviewing from './pages/Interviewing/Interviewing'
 import Accepted from './pages/Accepted/Accepted'
 import Offer from './pages/Offer/Offer'
+import Resume from './pages/Resume/Resume';
+import InterviewQuestions from './pages/InterviewQuestions/InterviewQuestions'
+
 
 class App extends Component {
 
@@ -73,6 +76,9 @@ class App extends Component {
             <Route path="/interviewing" element={<Interviewing />} />
             <Route path="/accepted" element={<Accepted />} />
             <Route path="/offer" element={<Offer />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="/interviewQuestions" element={<InterviewQuestions />} />
+
             
             <Route path="*" element={<Navigate to="/summary" replace />} />
 

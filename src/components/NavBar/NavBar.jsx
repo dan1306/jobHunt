@@ -60,15 +60,22 @@ export default class NavBar extends Component {
                 
                     </NavDropdown.Item>
                     
-                  </NavDropdown>
+                </NavDropdown>
+                
                   <NavDropdown title="Interview Prep" id="basic-nav-dropdown">
                 
-              <NavDropdown.Item href="#action/3.4">
-                Resume
-                    </NavDropdown.Item>
+                  <NavDropdown.Item>
+                  <Link to="/resume" className='rm-underline'>
+                  Resume
+                    </Link>
+                
+                </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">
-                Interview Questions And Answers
+                  <NavDropdown.Item>
+                  <Link to="/interviewQuestions" className='rm-underline'>
+                  Interview Questions And Answers
+
+                  </Link>
                     </NavDropdown.Item>
 
                   </NavDropdown>
