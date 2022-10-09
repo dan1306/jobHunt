@@ -9,3 +9,11 @@
 .spaceOut{
     margin-top: 20px;
 }
+
+.error-message{
+    color: red
+}
+
+.sucess-message{
+    color: green
+}

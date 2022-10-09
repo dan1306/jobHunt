@@ -71,7 +71,7 @@ class App extends Component {
           <Routes>
             
             <Route path="/summary" element={<Summary />} />
-            <Route path="/interested" element={<Interested user= {this.state.user._id} />} />
+            <Route path="/interested" element={<Interested userId= {this.state.user._id} />} />
             <Route path="/applied" element={<Applied/>} />
             <Route path="/interviewing" element={<Interviewing />} />
             <Route path="/accepted" element={<Accepted />} />

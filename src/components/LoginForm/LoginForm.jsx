@@ -37,8 +37,8 @@ export default class SignUpForm extends Component {
       const user = JSON.parse(atob(token.split('.')[1])).user
       this.props.setUserInState(user)
     } catch (err) {
-      console.log("SignupForm error", err);
-      this.setState({ error: "Sign Up Failed - Try Again" });
+      console.log("LogIn error", err);
+      this.setState({ error: "Log In Failed - Try Again" });
     }
   };
 

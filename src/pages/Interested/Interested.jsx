@@ -4,30 +4,34 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import './Interested.css'
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 
 class Interested extends Component {
 
     state = {
         JobTitle: '',
-        JobDescription: '',
-        userId: this.props.userId
+        JobDescription: '<p>Type Your Job Description Here</p>',
+        userId: this.props.userId,
+        error: '',
+        classColor: '',
+        submitted: false
     };
 
     editor = null
 
-    navigateToSummary = async (e) => {
+    // navigateToSummary = async (e) => {
 
-        e.preventDefault()
+    //     e.preventDefault()
 
-        let navigate = useNavigate()
+    //     let navigate = useNavigate()
 
-        navigate('/summary')
+       
 
         
         
-    }
+    // }
     
     
     
@@ -39,42 +43,68 @@ class Interested extends Component {
     }
 
     descChange = (e, editor) => {
-        this.setState({fieldTxt: editor.getData()})
+        this.setState({JobDescription: editor.getData()})
     }
 
-    handleSubmit= async (evt) => {
+    handleSubmit = async (evt) => {
+        
         evt.preventDefault();
 
-        const data = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                JobTitle: this.state.JobTitle, 
-                JobDescription: this.state.JobDescription, 
-                userId: this.state.userId 
-            })
 
+        try {
+            const data = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    JobTitle: this.state.JobTitle, 
+                    JobDescription: this.state.JobDescription, 
+                    userId: this.state.userId 
+                })
+    
+            }
+    
+            const fetchResponse = await fetch('/api/interested/create', data)
+            if (!fetchResponse.ok) {
+                console.log(fetchResponse)
+                await this.setState({error: `Fields can't be empty`, classColor: 'error-message' })
+            } else {
+                console.log(fetchResponse)
+                await this.setState({ error: `Interest Added`, classColor: 'sucess-message', submitted: true })
+                
+                
+                
+
+            }
+            
+    
+        } catch (err){
+            console.log("Create Interest error", err)
         }
-
-        const fetchResponse = await fetch('/api/users/signup', data)
-        
 
     }
 
     render() {
       return (
           <div className ='ckBorder'>
-              <h1> Interested
+              <h1>
+                  Interested
               </h1>
               <h2>CKEditor 5 using a custom build - decoupled editor</h2>
 
               <form>
-                    <div class="form-group spaceOut">
-                        <label >Job Title</label>
-                        <input type="text" class="form-control" name='JobTitle' onChange={this.titleChange} required/>
+                    <div className="form-group spaceOut">
+                      <label >Job Title</label>
+                      <input
+                          type="text"
+                          className="form-control"
+                          name='JobTitle'
+                          onChange={this.titleChange}
+                          value = {this.state.JobTitle}
+                          required 
+                        />
                     </div>
                     
-                    <div class="form-group spaceOut">
+                    <div className="form-group spaceOut">
                         <label >Job Description</label>
                         <CKEditor
                 
@@ -99,20 +129,36 @@ class Interested extends Component {
                             } }
                             onChange={ this.descChange  }
                             editor={ DecoupledEditor }
-                            data="<p>Type Your Job Description Here</p>"
+                            data={this.state.JobDescription}
                             config={{/* the editor configuration */ }}
                             
                             />
-                    </div>
+                  </div>
+                  
+                  {
+                      this.state.submitted ?
+                         
+                            <Link to="/applied" >
+                              <button className='btn btn-success spaceout'>
+
+                                  Return To Interest List
+                              </button>
+                            </Link>
+                          :
+                          <button onClick={this.handleSubmit} type="submit" class="btn btn-primary spaceOut">Submit</button>
+
+                  }
   
-                    <button onClick={this.navigateToSummary} type="submit" class="btn btn-primary spaceOut">Submit</button>
              </form>
             
 
 
 
               <div>
-                { ReactHtmlParser(this.state.JobDescription) }
+                  
+                  <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
+                  
+                {/* { ReactHtmlParser(this.state.JobDescription) } */}
               </div>
             </div>
       );
