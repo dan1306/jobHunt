@@ -62,7 +62,7 @@ class App extends Component {
   
   render() {
     return (
-      <div className="">
+      <div className="App">
         
         <NavBar userState={this.state.user} logout= {this.logout} Signup ={this.Signup} LogIn= {this.LogIn} />
         
@@ -71,7 +71,7 @@ class App extends Component {
           <Routes>
             
             <Route path="/summary" element={<Summary />} />
-            <Route path="/interested" element={<Interested />} />
+            <Route path="/interested" element={<Interested user= {this.state.user._id} />} />
             <Route path="/applied" element={<Applied/>} />
             <Route path="/interviewing" element={<Interviewing />} />
             <Route path="/accepted" element={<Accepted />} />
