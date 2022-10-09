@@ -8,5 +8,6 @@ router.get('/getInterests', interestCtrl.getInterest);
 
 router.delete('/deleteInterest', interestCtrl.deleteInterest )
 
+router.put('/editJobDesc', interestCtrl.editJobDesc )
 
 module.exports = router;

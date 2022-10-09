@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 
 
-class Interested extends Component {
+class CreateInterest extends Component {
 
     state = {
         JobTitle: '',
@@ -54,10 +54,6 @@ class Interested extends Component {
             } else {
                 console.log(fetchResponse)
                 await this.setState({ error: `Interest Added`, classColor: 'sucess-message', submitted: true })
-                
-                
-                
-
             }
             
     
@@ -122,7 +118,7 @@ class Interested extends Component {
                   {
                       this.state.submitted ?
                          
-                            <Link to="/applied" >
+                            <Link to="/viewInterests" >
                               <button className='btn btn-success spaceout'>
 
                                   Return To Interest List
@@ -149,4 +145,4 @@ class Interested extends Component {
     }
   }
   
-  export default Interested;
+  export default CreateInterest;

@@ -4,14 +4,16 @@ import AuthPage from './pages/AuthPage/AuthPage';
 import NavBar from './components/NavBar/NavBar';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Summary from './pages/Summary/Summary'
-import Interested from './pages/Interested/Interested'
 import Applied from './pages/Applied/Applied'
 import Interviewing from './pages/Interviewing/Interviewing'
 import Accepted from './pages/Accepted/Accepted'
 import Offer from './pages/Offer/Offer'
 import Resume from './pages/Resume/Resume';
 import InterviewQuestions from './pages/InterviewQuestions/InterviewQuestions'
-import InterestedIndex from './pages/Interested/InterestIndex';
+import ViewInterests from './pages/Interested/ViewInterests';
+import CreateInterest from './pages/Interested/CreateInterest';
+
+
 
 
 
@@ -73,8 +75,9 @@ class App extends Component {
           <Routes>
             
             <Route path="/summary" element={<Summary />} />
-            <Route path="/interested" element={<InterestedIndex userId= {this.state.user._id} />} />
-            <Route path="/applied" element={<Applied/>} />
+            <Route path="/viewInterests" element={<ViewInterests userId= {this.state.user._id} />} />
+            <Route path="/createInterest" element={<CreateInterest userId= {this.state.user._id} />} />
+            <Route path="/applied" element={<Applied />} />
             <Route path="/interviewing" element={<Interviewing />} />
             <Route path="/accepted" element={<Accepted />} />
             <Route path="/offer" element={<Offer />} />

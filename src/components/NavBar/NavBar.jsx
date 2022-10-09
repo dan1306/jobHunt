@@ -17,13 +17,28 @@ export default class NavBar extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               {userState ?
-                <Nav className="me-auto">
+              <Nav className="me-auto">
+                <NavDropdown title="Job Interests" id="basic-nav-dropdown">
+                <NavDropdown.Item>
+                    <Link to="/viewInterests" className='rm-underline'>
+                     View Interests
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="/createInterest" className='rm-underline'>
+                      Create Interest
+                    </Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
                 <NavDropdown title="Hunt Overview" id="basic-nav-dropdown">
+                  <NavDropdown title="Job Interests"  id="basic-nav-dropdown">
                   <NavDropdown.Item>
                     <Link to="/interested" className='rm-underline'>
                       Interested
                     </Link>
                   </NavDropdown.Item>
+                  </NavDropdown>
+    
                     <NavDropdown.Divider />
                   <NavDropdown.Item>
                   <Link to="/applied" className='rm-underline'>

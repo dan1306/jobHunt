@@ -3,7 +3,8 @@ const Interested = require('../models/interested');
 module.exports = {
     create,
     getInterest,
-    deleteInterest
+    deleteInterest,
+    editJobDesc
 };
   
 async function create(req, res) {
@@ -43,5 +44,25 @@ async function deleteInterest(req, res) {
     catch (err) {
         res.status(400).json(err)
 }
+    
+}
+
+
+async function editJobDesc(req, res) {
+    
+    console.log(req.body)
+
+    try {
+        let edit = await Interested.findById(req.body.id)
+        edit.JobDescription = req.body.JobDescription
+        edit = await edit.save()
+        console.log(edit)
+        res.status(200).json("all good")
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
+ 
     
 }
