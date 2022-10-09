@@ -21,22 +21,6 @@ class Interested extends Component {
 
     editor = null
 
-    // navigateToSummary = async (e) => {
-
-    //     e.preventDefault()
-
-    //     let navigate = useNavigate()
-
-       
-
-        
-        
-    // }
-    
-    
-    
-  
-
     titleChange = async (event) => {
         const { name, value } = event.target
         this.setState({[name]: value})

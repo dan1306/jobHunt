@@ -11,6 +11,8 @@ import Accepted from './pages/Accepted/Accepted'
 import Offer from './pages/Offer/Offer'
 import Resume from './pages/Resume/Resume';
 import InterviewQuestions from './pages/InterviewQuestions/InterviewQuestions'
+import InterestedIndex from './pages/Interested/InterestIndex';
+
 
 
 class App extends Component {
@@ -71,7 +73,7 @@ class App extends Component {
           <Routes>
             
             <Route path="/summary" element={<Summary />} />
-            <Route path="/interested" element={<Interested userId= {this.state.user._id} />} />
+            <Route path="/interested" element={<InterestedIndex userId= {this.state.user._id} />} />
             <Route path="/applied" element={<Applied/>} />
             <Route path="/interviewing" element={<Interviewing />} />
             <Route path="/accepted" element={<Accepted />} />
