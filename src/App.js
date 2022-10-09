@@ -62,7 +62,7 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App">
+      <div className="">
         
         <NavBar userState={this.state.user} logout= {this.logout} Signup ={this.Signup} LogIn= {this.LogIn} />
         
