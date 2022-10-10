@@ -4,6 +4,8 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { Link } from "react-router-dom";
+
 
 
 
@@ -16,7 +18,8 @@ class ViewInterests extends Component {
         interestedJobs: [],
         editId: null,
         editJobDesc: '',
-        jobTtile:''
+        jobTtile: '',
+        viewInterest: null
 
     }
 
@@ -98,8 +101,11 @@ class ViewInterests extends Component {
                 console.log(fetchResponse)
                 // await this.setState({editId: `Fields can't be empty`, classColor: 'error-message' })
             } else {
+                let getInterest = await fetch('/api/interested/getInterests')
+                getInterest = await getInterest.json()
+                this.setState({interestedJobs: getInterest, editId: null })
                 console.log(fetchResponse)
-                // await this.setState({ error: `Interest Added`, classColor: 'sucess-message', submitted: true })
+                await this.setState({ editId: null })
             }
             
     
@@ -108,6 +114,22 @@ class ViewInterests extends Component {
         }
 
     }
+
+    handleView = async (n) => {
+
+        if (!this.state.viewInterest) {
+            this.setState({viewInterest: this.state.interestedJobs[n]})
+
+        } else {
+            this.setState({viewInterest: null})
+
+        }
+
+
+
+    }
+
+    
 
     render() {
         return (
@@ -154,35 +176,67 @@ class ViewInterests extends Component {
                         </div>
                         :
                         <div>
-                        {
-                            this.state.interestedJobs.map((val, id) => {
-                            return (
-                                <div className='interestdivs'>
-                                    <h1>
-                                        {val.JobTitle}
-                                    </h1>
-                                    <div dangerouslySetInnerHTML={{ __html: val.JobDescription }} />
-                    
-
-                                    <button className='btn btn-danger spaceout' onClick={() => {
-                                        this.handleDelete(id)
-                                        
-                                    }}>
-                                        Delete
-                                    </button>
-                                    <button className='btn btn-primary spaceout' onClick={() => {
-                                        this.handleEdit(id)
-                                        
-                                    }}>
-                                        edit
-                                    </button>
+                            {
+                                <>
+                                    {
+                                        !this.state.viewInterest ?
+                                        this.state.interestedJobs.map((val, id) => {
+                                            return (
+                                                <div className='interestdivs'>
+                                                    <h1>
+                                                        {val.JobTitle}
+                                                    </h1>
+                                                    <div dangerouslySetInnerHTML={{ __html: val.JobDescription }} />
                                     
-                                    
-                                </div>
+
+                                                    <button className='btn btn-danger spaceout' onClick={() => {
+                                                        this.handleDelete(id)
+                                                        
+                                                    }}>
+                                                        Delete
+                                                    </button>
+                                                    <button className='btn btn-primary spaceout' onClick={() => {
+                                                        this.handleEdit(id)
+                                                        
+                                                    }}>
+                                                        edit
+                                                    </button>
+
+                                                    <button className='btn btn-success spaceout' onClick={() => {
+                                                        this.handleView(id)
+                                                        
+                                                    }}>
+                                                        view
+                                                    </button>
+                                            
+                                        
+                                                    </div>
 
 
-                            )
-                    })
+                                                )
+                                        }) :
+                                            <div className='interestdivs'>
+                                                
+                                                <h1>
+                                                    {this.state.viewInterest.JobTitle}
+                                                </h1>
+
+                                                <div>
+                                                    { ReactHtmlParser(this.state.viewInterest.JobDescription) }
+                                                </div>
+
+                                                <button className='btn btn-success spaceout' onClick={() => {
+                                                        this.handleView()
+                                                        
+                                                    }}>
+                                                    Return To Interest List
+                                                    
+                                                    </button>
+
+                                            </div>
+                                    }
+                                </>
+                 
                             } 
                             </div>            
                 }
