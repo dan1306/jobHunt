@@ -12,6 +12,7 @@ import Resume from './pages/Resume/Resume';
 import InterviewQuestions from './pages/InterviewQuestions/InterviewQuestions'
 import ViewInterests from './pages/Interested/ViewInterests';
 import CreateInterest from './pages/Interested/CreateInterest';
+import CreateOffer from './pages/Offer/CreateOffer';
 
 
 
@@ -80,7 +81,8 @@ class App extends Component {
             <Route path="/applied" element={<Applied />} />
             <Route path="/interviewing" element={<Interviewing />} />
             <Route path="/accepted" element={<Accepted />} />
-            <Route path="/offer" element={<Offer />} />
+            <Route path="/viewOffers" element={<Offer />} />
+            <Route path="/CreateOffer" element={<CreateOffer userId= {this.state.user._id} />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/interviewQuestions" element={<InterviewQuestions />} />
 

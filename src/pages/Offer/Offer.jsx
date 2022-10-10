@@ -2,9 +2,37 @@ import React, { Component } from 'react';
 
 class Offer extends Component {
 
+    state = {
+        offers: []
+    }
+
+    async componentDidMount() {
+        let getOffers = await fetch('/api/offer/getOffers')
+        getOffers = await getOffers.json()
+        this.setState({ offers: getOffers })
+        console.log(this.state)
+    }
+
+
     render() {
       return (
-        <header className="App-header"> <h1> Offer </h1> </header> 
+          <>
+              {
+                  this.state.offers.map((val, id) => {
+                      return (
+                          <div className='offerDiv'>
+                              
+                              {val.JobTitle}
+                              <br/>
+                              {val.PayPerYear}
+                              <br/>
+                              {val.starDate}
+                          </div>
+                      )
+                  })
+              }
+
+        </>
       );
     }
   }

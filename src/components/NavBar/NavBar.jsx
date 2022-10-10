@@ -18,18 +18,38 @@ export default class NavBar extends Component {
             <Navbar.Collapse id="basic-navbar-nav">
               {userState ?
               <Nav className="me-auto">
+                
+                
                 <NavDropdown title="Job Interests" id="basic-nav-dropdown">
                 <NavDropdown.Item>
                     <Link to="/viewInterests" className='rm-underline'>
                      View Interests
                     </Link>
                   </NavDropdown.Item>
+                  <NavDropdown.Divider />
                   <NavDropdown.Item>
                     <Link to="/createInterest" className='rm-underline'>
                       Create Interest
                     </Link>
                   </NavDropdown.Item>
                 </NavDropdown>
+
+                <NavDropdown title="Job Offers" id="basic-nav-dropdown">
+                <NavDropdown.Item>
+                    <Link to="/viewOffers" className='rm-underline'>
+                    View Offers
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item>
+                    <Link to="/createOffer" className='rm-underline'>
+                      Create An Offer
+                    </Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
+
+
+
                 <NavDropdown title="Hunt Overview" id="basic-nav-dropdown">
                   <NavDropdown title="Job Interests"  id="basic-nav-dropdown">
                   <NavDropdown.Item>
