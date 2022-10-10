@@ -1,3 +1,4 @@
+const Hunt = require('../models/hunt');
 const Offer = require('../models/offer');
 
 module.exports = {
@@ -8,8 +9,18 @@ module.exports = {
 async function create(req, res) {
     console.log(req.body)
     try {
-        await Offer.create({ JobTitle: req.body.JobTitle, PayPerYear: req.body.PayPerYear, starDate: req.body.starDate,  userId: req.body.userId })
+
+        let newOffer = new Offer()
+        newOffer.JobTitle = req.body.JobTitle
+        newOffer.PayPerYear = req.body.PayPerYear
+        newOffer.starDate = req.body.starDate
+        newOffer.userId = req.body.userId
+        newOffer = await newOffer.save()
         
+        let hunt = await Hunt.findById(req.body.id)
+        hunt.offer.push(newOffer._id)
+        hunt = await hunt.save()
+
         res.status(200).json("all good")
     } catch (err){
         res.status(400).json(err)

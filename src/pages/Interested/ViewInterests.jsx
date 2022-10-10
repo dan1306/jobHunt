@@ -26,7 +26,8 @@ class ViewInterests extends Component {
     editor = null
    
     async componentDidMount() {
-        let getInterest = await fetch('/api/interested/getInterests')
+        
+        let getInterest = await fetch(`/api/interested/getInterests/${this.props.huntId}`)
         getInterest = await getInterest.json()
         this.setState({interestedJobs: getInterest, editId: null })
     }
@@ -40,7 +41,8 @@ class ViewInterests extends Component {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                  id: this.state.interestedJobs[n]['_id']
+                    id: this.state.interestedJobs[n]['_id'],
+                    huntId: this.props.huntId
                 })
             }
             
@@ -91,7 +93,7 @@ class ViewInterests extends Component {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     id: this.state.editId, 
-                    JobDescription: this.state.editJobDesc, 
+                    JobDescription: this.state.editJobDesc,
                 })
     
             }

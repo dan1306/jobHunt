@@ -33,7 +33,9 @@ handleSubmit = async (evt) => {
                 JobTitle: this.state.JobTitle, 
               PayPerYear: this.state.PayPerYear,
               starDate: this.state.starDate,
-                userId: this.state.userId 
+              userId: this.state.userId,
+              id: this.props.huntId
+
             })
 
         }

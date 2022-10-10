@@ -90,11 +90,11 @@ class App extends Component {
                 <Route path="/summary" element={<Summary />} />
                 <Route
                   path="/viewInterests"
-                  element={<ViewInterests userId={this.state.user._id} />}
+                  element={<ViewInterests userId={this.state.user._id} huntId={this.state.huntId } />}
                 />
                 <Route
                   path="/createInterest"
-                  element={<CreateInterest userId={this.state.user._id} />}
+                  element={<CreateInterest userId={this.state.user._id} huntId={this.state.huntId } />}
                 />
                 <Route path="/applied" element={<Applied />} />
                 <Route path="/interviewing" element={<Interviewing />} />
@@ -102,7 +102,7 @@ class App extends Component {
                 <Route path="/viewOffers" element={<Offer />} />
                 <Route
                   path="/CreateOffer"
-                  element={<CreateOffer userId={this.state.user._id} />}
+                  element={<CreateOffer userId={this.state.user._id} huntId={this.state.huntId} />}
                 />
                 <Route path="/resume" element={<Resume />} />
                 <Route

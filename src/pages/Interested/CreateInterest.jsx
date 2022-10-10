@@ -42,7 +42,8 @@ class CreateInterest extends Component {
                 body: JSON.stringify({
                     JobTitle: this.state.JobTitle, 
                     JobDescription: this.state.JobDescription, 
-                    userId: this.state.userId 
+                    userId: this.state.userId,
+                    id: this.props.huntId
                 })
     
             }

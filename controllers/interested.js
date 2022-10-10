@@ -1,4 +1,5 @@
 const Interested = require('../models/interested');
+const Hunt = require('../models/hunt')
 
 module.exports = {
     create,
@@ -10,7 +11,15 @@ module.exports = {
 async function create(req, res) {
     console.log(req.body)
     try {
-        await Interested.create({ JobTitle: req.body.JobTitle, JobDescription: req.body.JobDescription, userId: req.body.userId })
+        let newInterest = new Interested();
+        newInterest.JobTitle = req.body.JobTitle
+        newInterest.JobDescription = req.body.JobDescription
+        newInterest.userId = req.body.userId 
+        newInterest = await newInterest.save()
+
+        let hunt = await Hunt.findById(req.body.id)
+        hunt.interested.push(newInterest._id)
+        hunt = await hunt.save()
         
         res.status(200).json("all good")
     } catch (err){
@@ -21,23 +30,34 @@ async function create(req, res) {
 
 async function getInterest(req, res) {
 
-    Interested.find({}, (err, interests) => {
-        if (err) {
-           
-            res.status(500).json(err)
-        } else {
-            console.log(interests)
-            res.json(interests)
-        }
-    } )
+    console.log(req.params)
+
+    let id = req.params.id
+
+    let hunt = await Hunt.findById(id)
+    hunt = await hunt.populate('interested')
+
+    res.json(hunt.interested)
+
+
     
 }
 
 async function deleteInterest(req, res) {
-    // console.log(req.body)
+    console.log(req.body)
     // res.status(200).json("all good")
     
     try {
+        let hunt = await Hunt.findById(req.body.huntId)
+
+        for (let i = 0; i < hunt.interested.length; i++){
+            if (hunt.interested[i]._id.toString() === req.body.id) {
+                hunt.interested.splice(i, 1)
+            }
+        }
+
+        await hunt.save()
+
         await Interested.findByIdAndDelete(req.body.id)
         res.status(200).json("all good")
     }
@@ -66,3 +86,17 @@ async function editJobDesc(req, res) {
  
     
 }
+
+
+// console.log(hunt)
+
+
+// Interested.find({}, (err, interests) => {
+//     if (err) {
+       
+//         res.status(500).json(err)
+//     } else {
+//         console.log(req.params)
+//         res.json(interests)
+//     }
+// } )
