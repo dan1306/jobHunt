@@ -12,6 +12,14 @@ const huntSchema = new Schema({
     offer:[{
         type: Schema.Types.ObjectId,
         ref: 'Offer'
+    }],
+    interviewing: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Interviewing'
+    }],
+    applied: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Applied'
     }]
     
 

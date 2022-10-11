@@ -19,6 +19,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(require('./config/auth'));
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/interviewing', require('./routes/api/interviewing'));
+app.use('/api/applied', require('./routes/api/applied'));
 app.use('/api/interested', require('./routes/api/interested'));
 app.use('/api/offer', require('./routes/api/offer'));
 app.use('/api/hunt', require('./routes/api/hunt'));

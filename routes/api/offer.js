@@ -4,6 +4,6 @@ const offertCtrl = require('../../controllers/offer');
 
 router.post('/create', offertCtrl.create);
 
-router.get('/getOffers', offertCtrl.getOffers);
+router.get('/getOffers/:id', offertCtrl.getOffers);
 
 module.exports = router;

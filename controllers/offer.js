@@ -31,14 +31,15 @@ async function create(req, res) {
 
 async function getOffers(req, res) {
 
-    Offer.find({}, (err, offers) => {
-        if (err) {
-           
-            res.status(500).json(err)
-        } else {
-            console.log(offers)
-            res.json(offers)
-        }
-    } )
+    let id = req.params.id
+    let hunt = await Hunt.findById(id)
+    hunt = await hunt.populate('offer')
+
+    console.log(hunt.offer)
+
+    res.json(hunt.offer)
+
+    
+ 
     
 }

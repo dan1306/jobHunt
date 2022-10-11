@@ -7,7 +7,7 @@ class Offer extends Component {
     }
 
     async componentDidMount() {
-        let getOffers = await fetch('/api/offer/getOffers')
+        let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`)
         getOffers = await getOffers.json()
         this.setState({ offers: getOffers })
         console.log(this.state)

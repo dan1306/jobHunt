@@ -19,6 +19,7 @@ export default class NavBar extends Component {
               <>
                 {huntChosen ? (
                   <Nav className="me-auto">
+                    
                     <NavDropdown title="Job Interests" id="basic-nav-dropdown">
                       <NavDropdown.Item>
                         <Link to="/viewInterests" className="rm-underline">
@@ -29,6 +30,34 @@ export default class NavBar extends Component {
                       <NavDropdown.Item>
                         <Link to="/createInterest" className="rm-underline">
                           Create Interest
+                        </Link>
+                      </NavDropdown.Item>
+                    </NavDropdown>
+
+                    <NavDropdown title="Applied" id="basic-nav-dropdown">
+                      <NavDropdown.Item>
+                        <Link to="/viewApplications" className="rm-underline">
+                          View Applications
+                        </Link>
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item>
+                        <Link to="/createApplication" className="rm-underline">
+                          Create Application
+                        </Link>
+                      </NavDropdown.Item>
+                    </NavDropdown>
+
+                    <NavDropdown title="Interviewing" id="basic-nav-dropdown">
+                      <NavDropdown.Item>
+                        <Link to="/viewInterviews" className="rm-underline">
+                          View Interviwing
+                        </Link>
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item>
+                        <Link to="/createInterview" className="rm-underline">
+                          Create Interviewing For
                         </Link>
                       </NavDropdown.Item>
                     </NavDropdown>
@@ -46,6 +75,10 @@ export default class NavBar extends Component {
                         </Link>
                       </NavDropdown.Item>
                     </NavDropdown>
+
+                   
+
+                
 
                     <NavDropdown title="Hunt Overview" id="basic-nav-dropdown">
                       <NavDropdown

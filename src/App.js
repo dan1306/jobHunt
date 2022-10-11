@@ -5,7 +5,8 @@ import NavBar from "./components/NavBar/NavBar";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Summary from "./pages/Summary/Summary";
 import Applied from "./pages/Applied/Applied";
-import Interviewing from "./pages/Interviewing/Interviewing";
+import CreateApplication from "./pages/Applied/CreateApplication";
+import Interviewing from "./pages/Interviewing/ViewInterviews";
 import Accepted from "./pages/Accepted/Accepted";
 import Offer from "./pages/Offer/Offer";
 import Resume from "./pages/Resume/Resume";
@@ -15,6 +16,9 @@ import CreateInterest from "./pages/Interested/CreateInterest";
 import CreateOffer from "./pages/Offer/CreateOffer";
 import VieweHunts from "./pages/Hunt/ViewHunts";
 import CreateHunt from "./pages/Hunt/CreateHunt";
+import CreateInterview from './pages/Interviewing/CreateInterview'
+import ViewInterviews from './pages/Interviewing/ViewInterviews'
+
 
 
 class App extends Component {
@@ -93,10 +97,13 @@ class App extends Component {
                   path="/createInterest"
                   element={<CreateInterest userId={this.state.user._id} huntId={this.state.huntId } />}
                 />
-                <Route path="/applied" element={<Applied />} />
-                <Route path="/interviewing" element={<Interviewing />} />
+                <Route path="/viewApplications" element={<Applied userId={this.state.user._id} huntId={this.state.huntId }  />} />
+                <Route path="/createApplication" element={<CreateApplication userId={this.state.user._id} huntId={this.state.huntId } />} />
+                <Route path="/createInterview" element={<CreateInterview userId={this.state.user._id} huntId={this.state.huntId } />} />
+                <Route path="/viewInterviews" element={<ViewInterviews  userId={this.state.user._id} huntId={this.state.huntId } />} />
+
                 <Route path="/accepted" element={<Accepted />} />
-                <Route path="/viewOffers" element={<Offer />} />
+                <Route path="/viewOffers" element={<Offer userId={this.state.user._id} huntId={this.state.huntId } />} />
                 <Route
                   path="/CreateOffer"
                   element={<CreateOffer userId={this.state.user._id} huntId={this.state.huntId} />}
