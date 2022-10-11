@@ -56,8 +56,8 @@ class CreateHunt extends Component {
 
   render() {
     return (
-      <div className="huntDiv">
-        <h1>Create A Job Hunt</h1>
+      <div className="huntDiv ">
+        <h1 className="text-center">Create A Job Hunt</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group spaceOut">
             <label>Give A Title to Your Hunt: </label>
@@ -88,7 +88,7 @@ class CreateHunt extends Component {
             </>
           }
         </form>
-        <div className="spaceout">
+        <div className="spaceout text-center">
           <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
         </div>
       </div>
