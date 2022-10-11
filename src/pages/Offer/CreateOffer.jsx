@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Offer.css'
+import { Link } from "react-router-dom";
+
 
 class CreateOffer extends Component {
 
@@ -8,6 +10,9 @@ class CreateOffer extends Component {
     PayPerYear: 0,
     starDate: null,
     userId: this.props.userId,
+    submitted: false,
+    error: '',
+    classColor:""
     
   }
 
@@ -42,9 +47,18 @@ handleSubmit = async (evt) => {
 
         const fetchResponse = await fetch('/api/offer/create', data)
         if (!fetchResponse.ok) {
-            console.log(fetchResponse)
+          console.log(fetchResponse)
+          await this.setState({
+            error: `Fields can't be empty`,
+            classColor: "error-message",
+          });
         } else {
-            console.log(fetchResponse)
+          console.log(fetchResponse)
+          await this.setState({
+            error: `Offer Added`,
+            classColor: "sucess-message",
+            submitted: true,
+          });
         }
         
 
@@ -92,8 +106,32 @@ handleSubmit = async (evt) => {
                 required
                           />
             </div>
-            <button type="submit" class="btn btn-primary spaceOut">Submit</button>
+            {
+              this.state.submitted ? (
+                <div className="spaceOut">
+              <Link to="/viewOffers">
+                <button className="btn btn-success ">
+                  Return To Offer List
+                </button>
+              </Link>
+            </div>
+
+                
+              )
+                :
+                (
+                  <div className="spaceout">
+                    
+                  <button type = "submit" class="btn btn-primary spaceOut">Submit</button>
+          </div>
+                )
+                
+            }
+
           </form>
+          <div className="spaceout text-center">
+          <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
+        </div>
         </div>
       );
     }

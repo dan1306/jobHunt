@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import './Interviewing.css'
+import "./Interviewing.css";
+import { Link } from "react-router-dom";
 
 class CreateInterview extends Component {
   state = {
@@ -8,6 +9,9 @@ class CreateInterview extends Component {
     RoundOfInterview: "",
     InterviewDate: "",
     userId: this.props.userId,
+    error: "",
+    classColor: "",
+    submitted: false,
   };
 
   handleChange = (e) => {
@@ -36,8 +40,17 @@ class CreateInterview extends Component {
       const fetchResponse = await fetch("/api/interviewing/create", data);
       if (!fetchResponse.ok) {
         console.log(fetchResponse);
+        await this.setState({
+          error: `Fields can't be empty`,
+          classColor: "error-message",
+        });
       } else {
         console.log(fetchResponse);
+        await this.setState({
+          error: `Interest Added`,
+          classColor: "sucess-message",
+          submitted: true,
+        });
       }
     } catch (err) {
       console.log("Create Interview error", err);
@@ -81,8 +94,8 @@ class CreateInterview extends Component {
               onChange={this.handleChange}
               required
             />
-                </div>
-                <div className="form-group spaceOut">
+          </div>
+          <div className="form-group spaceOut">
             <label>Interview Date:</label>
             <input
               type="date"
@@ -93,10 +106,25 @@ class CreateInterview extends Component {
               required
             />
           </div>
-          <button type="submit" class="btn btn-primary spaceOut">
-            Submit
-          </button>
+          {this.state.submitted ? (
+            <div className="spaceOut">
+              <Link to="/viewInterviews">
+                <button className="btn btn-success ">
+                  Return To Interest List
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <button type="submit" class="btn btn-primary spaceOut">
+                Submit
+              </button>
+            </div>
+          )}
         </form>
+        <div className="spaceout text-center">
+          <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
+        </div>
       </div>
     );
   }

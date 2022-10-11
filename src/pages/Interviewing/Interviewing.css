@@ -14,3 +14,14 @@
     padding: 20px;
 }
 
+.error-message{
+    color: red
+}
+
+.sucess-message{
+    color: green
+}
+
+.spaceOut{
+    margin-top: 30px !important;
+}
