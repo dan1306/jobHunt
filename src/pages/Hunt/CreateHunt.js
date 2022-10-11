@@ -1,55 +1,63 @@
 import React, { Component } from "react";
-import './hunt.css'
+import "./Hunt.css";
+import { Link } from "react-router-dom";
 
 class CreateHunt extends Component {
+  state = {
+    HuntName: "",
+    userId: this.props.userId,
+    classColor: "",
+    error: "",
+    submitted: false,
+  };
 
-    state = {
-        HuntName: '',
-        userId: this.props.userId
+  componentDidMount() {
+    this.setState({ submitted: false });
+  }
+
+  handleChange = (e) => {
+    const { name, value } = e.target;
+
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = async (evt) => {
+    evt.preventDefault();
+
+    try {
+      const data = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          HuntName: this.state.HuntName,
+          userId: this.state.userId,
+        }),
+      };
+
+      const fetchResponse = await fetch("/api/hunt/create", data);
+      if (!fetchResponse.ok) {
+        console.log(fetchResponse);
+        await this.setState({
+          error: "Check Input And Submit Again",
+          classColor: "error-message",
+        });
+      } else {
+        await this.setState({
+          submitted: true,
+          error: "Job Hunt Created",
+          classColor: "sucess-message",
+        });
+        console.log(fetchResponse);
+      }
+    } catch (err) {
+      console.log("Create Interest error", err);
     }
-
-    handleChange = (e) => {
-        const { name, value } = e.target
-        
-        this.setState({[name]: value})
-    }
-    
-
-
-    handleSubmit = async (evt) => {
-        
-        evt.preventDefault();
-    
-    
-        try {
-            const data = {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    HuntName: this.state.HuntName, 
-                    userId: this.state.userId 
-                })
-    
-            }
-    
-            const fetchResponse = await fetch('/api/hunt/create', data)
-            if (!fetchResponse.ok) {
-                console.log(fetchResponse)
-            } else {
-                console.log(fetchResponse)
-            }
-            
-    
-        } catch (err){
-            console.log("Create Interest error", err)
-        }
-    
-    }
+  };
 
   render() {
     return (
-        <div className="huntDiv">
-            <h1>Create A Job hunt</h1>
+      <div className="huntDiv">
+        <h1>Create A Job Hunt</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group spaceOut">
             <label>Give A Title to Your Hunt: </label>
@@ -57,15 +65,32 @@ class CreateHunt extends Component {
               type="text"
               className="form-control"
               name="HuntName"
-              value = {this.state.HuntName}
+              value={this.state.HuntName}
               onChange={this.handleChange}
               required
             />
           </div>
-          <button type="submit" class="btn btn-primary spaceOut">
-            Submit
-          </button>
+          {
+            <>
+              {this.state.submitted ? (
+                <div className="spaceOut">
+                  <Link to="/viewHunts">
+                    <button className="btn btn-success ">
+                      Return To Job Hunt List
+                    </button>
+                  </Link>
+                </div>
+              ) : (
+                <button type="submit" class="btn btn-primary spaceOut">
+                  Submit
+                </button>
+              )}
+            </>
+          }
         </form>
+        <div className="spaceout">
+          <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
+        </div>
       </div>
     );
   }

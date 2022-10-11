@@ -120,15 +120,15 @@ export default class NavBar extends Component {
                         <Link to="/viewHunts" className="rm-underline">
                           View Hunts
                         </Link>
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item>
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item>
                         <Link to="/createHunt" className="rm-underline">
-                        Create Hunt
+                          Create Hunt
                         </Link>
-                        </NavDropdown.Item>
+                      </NavDropdown.Item>
                     </NavDropdown>
-                  
+
                     <Nav.Link
                       href="#home"
                       onClick={async () => {

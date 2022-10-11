@@ -7,7 +7,7 @@
 }
 
 .spaceOut{
-    margin-top: 20px;
+    margin-top: 30px !important;
 }
 
 .error-message{
@@ -19,7 +19,23 @@
 }
 
 .interestdivs{
-    margin: 30px;
-    border: 3px solid black;
-    background-color: white;
+    /* padding: 30px; */
+    /* margin: 5px; */
+    border: 4px dashed #C3F8FF;
+    background-image: radial-gradient( circle farthest-corner at 92.3% 71.5%,  rgba(83,138,214,1) 0%, rgba(134,231,214,1) 90% );;
+    border-radius: 20px;
+    min-height: 200px;
+
+}
+
+.intContainer{
+    /* min-height: 100vh; */
+    padding: 20px;
+  background-color: white;
+  /* border: px solid black; */
+  margin: 20px;
+}
+
+.btn-space{
+margin: 5px;
 }

@@ -21,7 +21,6 @@ class App extends Component {
   state = {
     user: null,
     showLogin: true,
-    loggedIn: false,
     huntChosen: false,
     huntId: null
   };
@@ -57,12 +56,10 @@ class App extends Component {
 
   Signup = async () => {
     await this.setState({ showLogin: false });
-    this.setState({ loggedIn: true });
   };
 
   LogIn = async () => {
     await this.setState({ showLogin: true });
-    this.setState({ loggedIn: true });
   };
 
   handleChosenHunt = async (id) => {
@@ -120,7 +117,7 @@ class App extends Component {
                   element={<CreateHunt userId={this.state.user._id} />}
                 />
 
-                <Route path="*" element={<Navigate to="/createHunt" replace />} />
+                <Route path="*" element={<Navigate to="/viewHunts" replace />} />
               </Routes>
             )}
           </>

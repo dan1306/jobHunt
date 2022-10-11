@@ -4,4 +4,19 @@
     background-color: white;
     /* max-width: 90%; */
     padding: 20px;
+    border-radius: 30px;
+}
+
+.sucess-message{
+    color: green
+}
+
+.spaceOut{
+    margin-top: 30px !important;
+}
+
+
+
+.error-message{
+    color: red
 }

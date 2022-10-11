@@ -7,9 +7,6 @@ import SignUpForm from "../../components/SignUpForm/SignUpForm";
 
 
 export default class AuthPage extends React.Component {
-  state = {
-    showLogin: true,
-  };
 
   render() {
     return (
