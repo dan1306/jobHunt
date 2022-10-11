@@ -3,9 +3,11 @@ const Schema = mongoose.Schema;
 
 
 const appliedSchema = new Schema({
+    CompanyName: { type: String, required: true },
     JobTitle: { type: String, required: true },
     JobDescription: { type: String, required: true },
     DateApplied: { type: String, required: true },
+    link: { type: String, required: true },
     userId: { type: String }
 
 }, {

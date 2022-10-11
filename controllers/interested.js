@@ -61,8 +61,8 @@ async function deleteInterest(req, res) {
         await Interested.findByIdAndDelete(req.body.id)
         res.status(200).json("all good")
     }
-    catch (err) {
-        res.status(400).json(err)
+    catch (err) {        res.status(400).json(err)
+
 }
     
 }

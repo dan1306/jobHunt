@@ -113,11 +113,11 @@ class ViewInterests extends Component {
       <>
         {this.state.editId ? (
           <div className="ckBorder">
-            <h1>{this.state.jobTtile}</h1>
+            <h1 className="job-title">{this.state.jobTtile}</h1>
 
             <form>
               <div className="form-group spaceOut">
-                <label>Job Description</label>
+                <label>Job Description: </label>
                 <CKEditor
                   onReady={(editor) => {
                     console.log("Editor is ready to use!", editor);
@@ -207,10 +207,10 @@ class ViewInterests extends Component {
                     })}
                   </div>
                 ) : (
-                  <div className="interestdivs">
-                    <h1>{this.state.viewInterest.JobTitle}</h1>
+                  <div className="viewJobInterest ">
+                    <h1 className="job-title">{this.state.viewInterest.JobTitle}</h1>
 
-                    <div>
+                    <div className="jobDesc">
                       {ReactHtmlParser(this.state.viewInterest.JobDescription)}
                     </div>
 

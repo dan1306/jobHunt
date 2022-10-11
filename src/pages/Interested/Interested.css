@@ -21,9 +21,21 @@
 .interestdivs{
     /* padding: 30px; */
     /* margin: 5px; */
-    border: 4px dashed #C3F8FF;
-    background-image: radial-gradient( circle farthest-corner at 92.3% 71.5%,  rgba(83,138,214,1) 0%, rgba(134,231,214,1) 90% );;
-    border-radius: 20px;
+    border: 6px dashed #C3F8FF;
+    background-color: #FEF5ED;
+
+    background-image: linear-gradient(175deg, rgba(0,0,0,0) 95%, #8da389 95%),
+    linear-gradient( 85deg, rgba(0,0,0,0) 95%, #8da389 95%),
+    linear-gradient(175deg, rgba(0,0,0,0) 90%, #b4b07f 90%),
+    linear-gradient( 85deg, rgba(0,0,0,0) 92%, #b4b07f 92%),
+    linear-gradient(175deg, rgba(0,0,0,0) 85%, #c5a68e 85%),
+    linear-gradient( 85deg, rgba(0,0,0,0) 89%, #c5a68e 89%),
+    linear-gradient(175deg, rgba(0,0,0,0) 80%, #ba9499 80%),
+    linear-gradient( 85deg, rgba(0,0,0,0) 86%, #ba9499 86%),
+    linear-gradient(175deg, rgba(0,0,0,0) 75%, #9f8fa4 75%),
+    linear-gradient( 85deg, rgba(0,0,0,0) 83%, #9f8fa4 83%),
+    linear-gradient(175deg, rgba(0,0,0,0) 70%, #74a6ae 70%),
+    linear-gradient( 85deg, rgba(0,0,0,0) 80%, #74a6ae 80%);    border-radius: 20px;
     min-height: 200px;
 
 }
@@ -38,4 +50,23 @@
 
 .btn-space{
 margin: 5px;
+}
+
+
+.viewJobInterest{
+    border: 3px solid black;
+    margin: 30px;
+    padding: 15px;
+    background-color: white;
+}
+
+.jobDesc{
+    border: 3px solid black;
+    margin: 30px;
+    padding: 30px;
+    background-color: #f2eecb ;
+}
+
+.job-title{
+    text-align: center;
 }

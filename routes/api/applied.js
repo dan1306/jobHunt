@@ -6,4 +6,8 @@ router.post('/create', appliedtCtrl.create);
 
 router.get('/getAppliedJobs/:id', appliedtCtrl.getAppliedJobs);
 
+router.delete('/deleteApplication', appliedtCtrl.deleteApplication)
+
+router.put( '/edit' ,appliedtCtrl.editApplication)
+
 module.exports = router;
