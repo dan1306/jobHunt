@@ -6,7 +6,8 @@ class Interviewing extends Component {
     interviewing: [],
     editId: null,
     RoundOfInterview: '',
-    InterviewDate:''
+    InterviewDate: '',
+    editIntState: null
   };
 
   async componentDidMount() {
