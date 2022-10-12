@@ -1,27 +1,29 @@
 import React, { Component } from "react";
-import "./Applied.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2,
+} from "react-html-parser";
+import "./Interest.css";
 import { Link } from "react-router-dom";
 
-class CreateApplication extends Component {
+class CreateInterest extends Component {
   state = {
     JobTitle: "",
     JobDescription: "<p>Type Your Job Description Here</p>",
-    DateApplied: "",
     userId: this.props.userId,
-    CompanyName: "",
-    link: "",
     error: "",
     classColor: "",
-    submitted: false
+    submitted: false,
   };
 
   editor = null;
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-
+  titleChange = async (event) => {
+    const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
@@ -39,15 +41,12 @@ class CreateApplication extends Component {
         body: JSON.stringify({
           JobTitle: this.state.JobTitle,
           JobDescription: this.state.JobDescription,
-          DateApplied: this.state.DateApplied,
           userId: this.state.userId,
           id: this.props.huntId,
-          CompanyName: this.state.CompanyName,
-          link: this.state.link,
         }),
       };
 
-      const fetchResponse = await fetch("/api/applied/create", data);
+      const fetchResponse = await fetch("/api/interested/create", data);
       if (!fetchResponse.ok) {
         console.log(fetchResponse);
         await this.setState({
@@ -57,53 +56,37 @@ class CreateApplication extends Component {
       } else {
         console.log(fetchResponse);
         await this.setState({
-          error: `Added`,
+          error: `Interest Added`,
           classColor: "sucess-message",
           submitted: true,
         });
       }
     } catch (err) {
-      console.log("Create Interview error", err);
+      console.log("Create Interest error", err);
     }
   };
 
   render() {
     return (
-      <div className="appliedDiv">
-        <h1> Applied For This Job: </h1>
-        <form onSubmit={this.handleSubmit}>
+      <div className="ckBorder">
+        <h1>Create A Job Of Interest</h1>
+        
+
+        <form>
           <div className="form-group spaceOut">
-            <label>Company Name: </label>
-            <input
-              type="text"
-              className="form-control"
-              name="CompanyName"
-              value={this.state.CompanyName}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="form-group spaceOut">
-            <label>Job Title: </label>
+            <label>Job Title:</label>
             <input
               type="text"
               className="form-control"
               name="JobTitle"
+              onChange={this.titleChange}
               value={this.state.JobTitle}
-              onChange={this.handleChange}
               required
             />
           </div>
+
           <div className="form-group spaceOut">
             <label>Job Description:</label>
-            {/* <input
-              type="text"
-              className="form-control"
-              name="JobDescription"
-              value={this.state.JobDescription}
-              onChange={this.handleChange}
-              required
-              /> */}
             <div className="editor">
             <CKEditor
               onReady={(editor) => {
@@ -138,40 +121,19 @@ class CreateApplication extends Component {
               />
               </div>
           </div>
-          <div className="form-group spaceOut">
-            <label>Date Applied</label>
-            <input
-              type="date"
-              className="form-control"
-              name="DateApplied"
-              value={this.state.DateApplied}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="form-group spaceOut">
-            <label>Paste Job Link Here: </label>
-            <input
-              type="text"
-              className="form-control"
-              name="link"
-              value={this.state.link}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
 
           {this.state.submitted ? (
             <div className="spaceOut">
-              <Link to="/viewApplications">
+              <Link to="/viewInterests">
                 <button className="btn btn-success ">
-                  Return To Appplied List
+                  Return To Interest List
                 </button>
               </Link>
             </div>
           ) : (
             <div className="spaceOut">
               <button
+                onClick={this.handleSubmit}
                 type="submit"
                 class="btn btn-primary "
               >
@@ -179,8 +141,8 @@ class CreateApplication extends Component {
               </button>
             </div>
           )}
-
         </form>
+
         <div className="spaceout text-center">
           <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
         </div>
@@ -189,4 +151,4 @@ class CreateApplication extends Component {
   }
 }
 
-export default CreateApplication;
+export default CreateInterest;
