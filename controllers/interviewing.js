@@ -3,7 +3,8 @@ const Interviewing = require('../models/interviewing');
 
 module.exports = {
     create,
-    getInterviews
+    getInterviews,
+    editInterview
 };
 
 async function create(req, res) {
@@ -39,5 +40,23 @@ async function getInterviews(req, res) {
     console.log(hunt.interviewing)
 
     res.json(hunt.interviewing)
+    
+}
+
+async function editInterview(req, res) {
+
+    try {
+        let edit = await Interviewing.findById(req.body.id)
+        edit.InterviewDate = req.body.InterviewDate
+        edit.RoundOfInterview = req.body.RoundOfInterview
+        edit = await edit.save()
+        console.log(edit)
+        res.status(200).json("all good")
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
+
     
 }

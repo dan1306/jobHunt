@@ -6,4 +6,6 @@ router.post('/create', interviewingtCtrl.create);
 
 router.get('/getInterviews/:id', interviewingtCtrl.getInterviews);
 
+router.put('/edit', interviewingtCtrl.editInterview)
+
 module.exports = router;
