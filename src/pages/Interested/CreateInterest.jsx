@@ -69,12 +69,12 @@ class CreateInterest extends Component {
   render() {
     return (
       <div className="ckBorder">
-        <h1>Interested</h1>
-        <h2>CKEditor 5 using a custom build - decoupled editor</h2>
+        <h1>Create A Job Of Interest</h1>
+        
 
         <form>
           <div className="form-group spaceOut">
-            <label>Job Title</label>
+            <label>Job Title:</label>
             <input
               type="text"
               className="form-control"
@@ -86,7 +86,8 @@ class CreateInterest extends Component {
           </div>
 
           <div className="form-group spaceOut">
-            <label>Job Description</label>
+            <label>Job Description:</label>
+            <div className="editor">
             <CKEditor
               onReady={(editor) => {
                 console.log("Editor is ready to use!", editor);
@@ -117,7 +118,8 @@ class CreateInterest extends Component {
                   /* the editor configuration */
                 }
               }
-            />
+              />
+              </div>
           </div>
 
           {this.state.submitted ? (
@@ -141,7 +143,7 @@ class CreateInterest extends Component {
           )}
         </form>
 
-        <div className="spaceout">
+        <div className="spaceout text-center">
           <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
         </div>
       </div>

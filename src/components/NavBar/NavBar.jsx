@@ -12,14 +12,13 @@ export default class NavBar extends Component {
     return (
       <Navbar className="nav-color" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand href="">Job Hunt</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             {userState ? (
               <>
                 {huntChosen ? (
                   <Nav className="me-auto">
-                    
                     <NavDropdown title="Job Interests" id="basic-nav-dropdown">
                       <NavDropdown.Item>
                         <Link to="/viewInterests" className="rm-underline">
@@ -76,54 +75,6 @@ export default class NavBar extends Component {
                       </NavDropdown.Item>
                     </NavDropdown>
 
-                   
-
-                
-
-                    <NavDropdown title="Hunt Overview" id="basic-nav-dropdown">
-                      <NavDropdown
-                        title="Job Interests"
-                        id="basic-nav-dropdown"
-                      >
-                        <NavDropdown.Item>
-                          <Link to="/interested" className="rm-underline">
-                            Interested
-                          </Link>
-                        </NavDropdown.Item>
-                      </NavDropdown>
-
-                      <NavDropdown.Divider />
-                      <NavDropdown.Item>
-                        <Link to="/applied" className="rm-underline">
-                          Applied
-                        </Link>
-                      </NavDropdown.Item>
-                      <NavDropdown.Divider />
-                      <NavDropdown.Item href="#action/3.3">
-                        <Link to="/interviewing" className="rm-underline">
-                          Interviewing
-                        </Link>
-                      </NavDropdown.Item>
-                      <NavDropdown.Divider />
-                      <NavDropdown.Item>
-                        <Link to="/offer" className="rm-underline">
-                          Offer
-                        </Link>
-                      </NavDropdown.Item>
-                      <NavDropdown.Divider />
-                      <NavDropdown.Item href="#action/3.4">
-                        <Link to="/accepted" className="rm-underline">
-                          Accepted
-                        </Link>
-                      </NavDropdown.Item>
-                      <NavDropdown.Divider />
-                      <NavDropdown.Item href="#action/3.4">
-                        <Link to="/summary" className="rm-underline">
-                          Summary
-                        </Link>
-                      </NavDropdown.Item>
-                    </NavDropdown>
-
                     <NavDropdown title="Interview Prep" id="basic-nav-dropdown">
                       <NavDropdown.Item>
                         <Link to="/resume" className="rm-underline">
@@ -148,7 +99,7 @@ export default class NavBar extends Component {
                   </Nav>
                 ) : (
                   <Nav className="me-auto">
-                    <NavDropdown title="Interview Prep" id="basic-nav-dropdown">
+                    <NavDropdown title="Hunt" id="basic-nav-dropdown">
                       <NavDropdown.Item>
                         <Link to="/viewHunts" className="rm-underline">
                           View Hunts
@@ -163,7 +114,6 @@ export default class NavBar extends Component {
                     </NavDropdown>
 
                     <Nav.Link
-                      href="#home"
                       onClick={async () => {
                         logout();
                       }}

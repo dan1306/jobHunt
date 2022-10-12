@@ -17,7 +17,7 @@ class ViewInterests extends Component {
     editJobDesc: "",
     jobTtile: "",
     viewInterest: null,
-    editIntState: null
+    editIntState: null,
   };
 
   editor = null;
@@ -50,12 +50,12 @@ class ViewInterests extends Component {
         console.log(fetchResponse);
       } else {
         console.log(fetchResponse);
-        let newInterestArr = this.state.interestedJobs
-        newInterestArr.splice(n, 1)
-       await this.setState({interestedJobs: newInterestArr})
+        let newInterestArr = this.state.interestedJobs;
+        newInterestArr.splice(n, 1);
+        await this.setState({ interestedJobs: newInterestArr });
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -64,7 +64,7 @@ class ViewInterests extends Component {
       editId: this.state.interestedJobs[n]["_id"],
       editJobDesc: this.state.interestedJobs[n]["JobDescription"],
       jobTtile: this.state.interestedJobs[n]["JobTitle"],
-      editIntState: n
+      editIntState: n,
     });
   };
 
@@ -90,10 +90,11 @@ class ViewInterests extends Component {
         // await this.setState({editId: `Fields can't be empty`, classColor: 'error-message' })
       } else {
         console.log(fetchResponse);
-        let newArr = this.state.interestedJobs
+        let newArr = this.state.interestedJobs;
         // console.log(newArr[])
-        newArr[this.state.editIntState]['JobDescription'] = this.state.editJobDesc
-        await this.setState({ editId: null,  interestedJobs: newArr});
+        newArr[this.state.editIntState]["JobDescription"] =
+          this.state.editJobDesc;
+        await this.setState({ editId: null, interestedJobs: newArr });
       }
     } catch (err) {
       console.log("Create Interest error", err);
@@ -118,37 +119,39 @@ class ViewInterests extends Component {
             <form>
               <div className="form-group spaceOut">
                 <label>Job Description: </label>
-                <CKEditor
-                  onReady={(editor) => {
-                    console.log("Editor is ready to use!", editor);
+                <div className="editor">
+                  <CKEditor
+                    onReady={(editor) => {
+                      console.log("Editor is ready to use!", editor);
 
-                    // Insert the toolbar before the editable area.
-                    editor.ui
-                      .getEditableElement()
-                      .parentElement.insertBefore(
-                        editor.ui.view.toolbar.element,
-                        editor.ui.getEditableElement()
-                      );
+                      // Insert the toolbar before the editable area.
+                      editor.ui
+                        .getEditableElement()
+                        .parentElement.insertBefore(
+                          editor.ui.view.toolbar.element,
+                          editor.ui.getEditableElement()
+                        );
 
-                    this.editor = editor;
-                  }}
-                  onError={(error, { willEditorRestart }) => {
-                    // If the editor is restarted, the toolbar element will be created once again.
-                    // The `onReady` callback will be called again and the new toolbar will be added.
-                    // This is why you need to remove the older toolbar.
-                    if (willEditorRestart) {
-                      this.editor.ui.view.toolbar.element.remove();
+                      this.editor = editor;
+                    }}
+                    onError={(error, { willEditorRestart }) => {
+                      // If the editor is restarted, the toolbar element will be created once again.
+                      // The `onReady` callback will be called again and the new toolbar will be added.
+                      // This is why you need to remove the older toolbar.
+                      if (willEditorRestart) {
+                        this.editor.ui.view.toolbar.element.remove();
+                      }
+                    }}
+                    onChange={this.descChange}
+                    editor={DecoupledEditor}
+                    data={this.state.editJobDesc}
+                    config={
+                      {
+                        /* the editor configuration */
+                      }
                     }
-                  }}
-                  onChange={this.descChange}
-                  editor={DecoupledEditor}
-                  data={this.state.editJobDesc}
-                  config={
-                    {
-                      /* the editor configuration */
-                    }
-                  }
-                />
+                  />
+                </div>
               </div>
               <button
                 onClick={this.handleSubmit}
@@ -169,21 +172,22 @@ class ViewInterests extends Component {
                       return (
                         <div className="interestdivs col-lg-4 col-md-6 col-sm-12">
                           <h1 className="text-center">{val.JobTitle}</h1>
-                              <div className="text-center">
-                                  <p>Created On: {new Date(val.createdAt).toLocaleDateString()}</p>
-                           
+                          <div className="text-center">
+                            <p>
+                              Created On:{" "}
+                              {new Date(val.createdAt).toLocaleDateString()}
+                            </p>
                           </div>
                           <div className="text-center">
-                            
-                              <button
-                                className="btn btn-danger spaceout  btn-space"
-                                onClick={() => {
-                                  this.handleDelete(id);
-                                }}
-                              >
-                                Delete
-                              </button>
-                    
+                            <button
+                              className="btn btn-danger spaceout  btn-space"
+                              onClick={() => {
+                                this.handleDelete(id);
+                              }}
+                            >
+                              Delete
+                            </button>
+
                             <button
                               className="btn btn-primary spaceout  btn-space"
                               onClick={() => {
@@ -207,21 +211,24 @@ class ViewInterests extends Component {
                     })}
                   </div>
                 ) : (
-                  <div className="viewJobInterest ">
-                    <h1 className="job-title">{this.state.viewInterest.JobTitle}</h1>
+                  <div className="viewJobInterest">
+                    <h1 className="job-title">
+                      {this.state.viewInterest.JobTitle}
+                    </h1>
 
                     <div className="jobDesc">
                       {ReactHtmlParser(this.state.viewInterest.JobDescription)}
                     </div>
-
-                    <button
-                      className="btn btn-success spaceout"
-                      onClick={() => {
-                        this.handleView();
-                      }}
-                    >
-                      Return To Interest List
-                    </button>
+                    <div className="text-center">
+                      <button
+                        className="btn btn-success spaceout"
+                        onClick={() => {
+                          this.handleView();
+                        }}
+                      >
+                        Return To Interest List
+                      </button>
+                    </div>
                   </div>
                 )}
               </>

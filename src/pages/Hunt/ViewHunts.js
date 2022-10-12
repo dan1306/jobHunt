@@ -29,47 +29,41 @@ class VieweHunts extends Component {
   };
 
   handleDelete = async (n) => {
-
     try {
       const options = {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           huntId: this.state.huntList[n]["_id"],
-        })
-      }
+        }),
+      };
 
-      const fetchResponse = await fetch(
-        "/api/hunt/deleteAll",
-        options
-      );
+      const fetchResponse = await fetch("/api/hunt/deleteAll", options);
 
       if (!fetchResponse.ok) {
         console.log(fetchResponse);
       } else {
         console.log(fetchResponse);
-        let newArr = this.state.huntList
-      newArr.splice(n, 1)
-      await this.setState({huntList: newArr})
+        let newArr = this.state.huntList;
+        newArr.splice(n, 1);
+        await this.setState({ huntList: newArr });
       }
-
-      
-
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-   
-  }
+  };
 
   render() {
     return (
-      <div className="huntMainDiv">
+      <div >
         {this.state.huntList.map((val, id) => {
           return (
             <div className="huntDiv">
               <div>
                 <h3>Hunt Title: {val.HuntName}</h3>
-                <p>Created On: {new Date(val.createdAt).toLocaleDateString()} </p>
+                <p>
+                  Created On: {new Date(val.createdAt).toLocaleDateString()}{" "}
+                </p>
               </div>
               <div className="spaceTop">
                 <button

@@ -56,7 +56,7 @@ class CreateHunt extends Component {
 
   render() {
     return (
-      <div className="huntDiv ">
+      <div className="createDiv">
         <h1 className="text-center">Create A Job Hunt</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group spaceOut">

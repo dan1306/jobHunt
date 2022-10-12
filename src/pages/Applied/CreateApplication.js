@@ -104,6 +104,7 @@ class CreateApplication extends Component {
               onChange={this.handleChange}
               required
               /> */}
+            <div className="editor">
             <CKEditor
               onReady={(editor) => {
                 console.log("Editor is ready to use!", editor);
@@ -134,7 +135,8 @@ class CreateApplication extends Component {
                   /* the editor configuration */
                 }
               }
-            />
+              />
+              </div>
           </div>
           <div className="form-group spaceOut">
             <label>Date Applied</label>

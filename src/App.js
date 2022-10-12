@@ -16,17 +16,15 @@ import CreateInterest from "./pages/Interested/CreateInterest";
 import CreateOffer from "./pages/Offer/CreateOffer";
 import VieweHunts from "./pages/Hunt/ViewHunts";
 import CreateHunt from "./pages/Hunt/CreateHunt";
-import CreateInterview from './pages/Interviewing/CreateInterview'
-import ViewInterviews from './pages/Interviewing/ViewInterviews'
-
-
+import CreateInterview from "./pages/Interviewing/CreateInterview";
+import ViewInterviews from "./pages/Interviewing/ViewInterviews";
 
 class App extends Component {
   state = {
     user: null,
     showLogin: true,
     huntChosen: false,
-    huntId: null
+    huntId: null,
   };
 
   componentDidMount = () => {
@@ -50,8 +48,8 @@ class App extends Component {
   logout = async () => {
     await this.setState({ showLogin: true });
     await this.setState({ loggedIn: false });
-    await this.setState({ huntChosen: false })
-    await this.setState({huntId: null})
+    await this.setState({ huntChosen: false });
+    await this.setState({ huntId: null });
 
     localStorage.removeItem("token");
     let user = null;
@@ -67,11 +65,9 @@ class App extends Component {
   };
 
   handleChosenHunt = async (id) => {
-
-    await this.setState({ huntId: id })
-    await this.setState({huntChosen: true})
-    
-  }
+    await this.setState({ huntId: id });
+    await this.setState({ huntChosen: true });
+  };
 
   render() {
     return (
@@ -91,22 +87,77 @@ class App extends Component {
                 <Route path="/summary" element={<Summary />} />
                 <Route
                   path="/viewInterests"
-                  element={<ViewInterests userId={this.state.user._id} huntId={this.state.huntId } />}
+                  element={
+                    <ViewInterests
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
                 />
                 <Route
                   path="/createInterest"
-                  element={<CreateInterest userId={this.state.user._id} huntId={this.state.huntId } />}
+                  element={
+                    <CreateInterest
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
                 />
-                <Route path="/viewApplications" element={<Applied userId={this.state.user._id} huntId={this.state.huntId }  />} />
-                <Route path="/createApplication" element={<CreateApplication userId={this.state.user._id} huntId={this.state.huntId } />} />
-                <Route path="/createInterview" element={<CreateInterview userId={this.state.user._id} huntId={this.state.huntId } />} />
-                <Route path="/viewInterviews" element={<ViewInterviews  userId={this.state.user._id} huntId={this.state.huntId } />} />
+                <Route
+                  path="/viewApplications"
+                  element={
+                    <Applied
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
+                />
+                <Route
+                  path="/createApplication"
+                  element={
+                    <CreateApplication
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
+                />
+                <Route
+                  path="/createInterview"
+                  element={
+                    <CreateInterview
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
+                />
+                <Route
+                  path="/viewInterviews"
+                  element={
+                    <ViewInterviews
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
+                />
 
                 <Route path="/accepted" element={<Accepted />} />
-                <Route path="/viewOffers" element={<Offer userId={this.state.user._id} huntId={this.state.huntId } />} />
+                <Route
+                  path="/viewOffers"
+                  element={
+                    <Offer
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
+                />
                 <Route
                   path="/CreateOffer"
-                  element={<CreateOffer userId={this.state.user._id} huntId={this.state.huntId} />}
+                  element={
+                    <CreateOffer
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
                 />
                 <Route path="/resume" element={<Resume />} />
                 <Route
@@ -118,13 +169,24 @@ class App extends Component {
               </Routes>
             ) : (
               <Routes>
-                <Route path="/viewHunts" element={<VieweHunts userId={this.state.user._id} handleChosenHunt= {this.handleChosenHunt} />} />
+                <Route
+                  path="/viewHunts"
+                  element={
+                    <VieweHunts
+                      userId={this.state.user._id}
+                      handleChosenHunt={this.handleChosenHunt}
+                    />
+                  }
+                />
                 <Route
                   path="/createHunt"
                   element={<CreateHunt userId={this.state.user._id} />}
                 />
 
-                <Route path="*" element={<Navigate to="/viewHunts" replace />} />
+                <Route
+                  path="*"
+                  element={<Navigate to="/viewHunts" replace />}
+                />
               </Routes>
             )}
           </>

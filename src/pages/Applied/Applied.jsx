@@ -109,7 +109,7 @@ class Applied extends Component {
   };
   render() {
     return (
-      <>
+      <div>
         {this.state.editId ? (
           <div className="ckBorder">
             <h1 className="job-title">{this.state.jobTtile}</h1>
@@ -117,6 +117,7 @@ class Applied extends Component {
             <form>
               <div className="form-group spaceOut">
                 <label>Job Description: </label>
+                <div className="editor">
                 <CKEditor
                   onReady={(editor) => {
                     console.log("Editor is ready to use!", editor);
@@ -148,7 +149,8 @@ class Applied extends Component {
                       /* the editor configuration */
                     }
                   }
-                />
+                  />
+                  </div>
               </div>
               <button
                 onClick={this.handleSubmit}
@@ -209,8 +211,8 @@ class Applied extends Component {
                     <div className="jobDesc">
                       {ReactHtmlParser(this.state.viewApplication.JobDescription)}
                     </div>
-
-                    <button
+                  <div className="text-center">
+                  <button
                       className="btn btn-success spaceout"
                       onClick={() => {
                         this.handleView();
@@ -218,12 +220,14 @@ class Applied extends Component {
                     >
                       Return To Interest List
                     </button>
+                    </div>
+                  
                   </div>
               }
               </>
  
         )}
-      </>
+      </div>
     );
   }
 }
