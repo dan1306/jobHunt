@@ -63,6 +63,34 @@ class Interviewing extends Component {
     this.setState({ [name]: value });
   };
 
+  handleDelete = async (n) => {
+    try {
+      const options = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: this.state.interviewing[n]["_id"],
+          huntId: this.props.huntId,
+        }),
+      };
+
+      const fetchResponse = await fetch(
+        "/api/interviewing/delete",
+        options
+      );
+      if (!fetchResponse.ok) {
+        console.log(fetchResponse);
+      } else {
+        console.log(fetchResponse);
+        let newInterestArr = this.state.interviewing
+        newInterestArr.splice(n, 1)
+       await this.setState({interviewing: newInterestArr})
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
+
   
 
   render() {
@@ -124,7 +152,7 @@ class Interviewing extends Component {
                       Edit
                     </button>
                     <button
-                      onClick={this.handleSubmit}
+                      onClick={() => { this.handleDelete(id) }}
                       type="submit"
                       class="btn btn-danger spaceOut"
                     >

@@ -4,7 +4,8 @@ const Interviewing = require('../models/interviewing');
 module.exports = {
     create,
     getInterviews,
-    editInterview
+    editInterview,
+    deleteInterview
 };
 
 async function create(req, res) {
@@ -58,5 +59,27 @@ async function editInterview(req, res) {
         res.status(400).json(err)
     }
 
+    
+}
+
+async function deleteInterview(req, res) {
+    try {
+        let hunt = await Hunt.findById(req.body.huntId)
+
+        for (let i = 0; i < hunt.interviewing.length; i++){
+            if (hunt.interviewing[i]._id.toString() === req.body.id) {
+                hunt.interviewing.splice(i, 1)
+            }
+        }
+        
+        await hunt.save()
+
+        await Interviewing.findByIdAndDelete(req.body.id)
+        res.status(200).json("all good")
+
+    } catch (err) {
+        res.status(400).json(err)
+
+    }
     
 }

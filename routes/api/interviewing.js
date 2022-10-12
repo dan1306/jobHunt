@@ -8,4 +8,6 @@ router.get('/getInterviews/:id', interviewingtCtrl.getInterviews);
 
 router.put('/edit', interviewingtCtrl.editInterview)
 
+router.delete('/delete', interviewingtCtrl.deleteInterview)
+
 module.exports = router;
