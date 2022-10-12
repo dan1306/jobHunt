@@ -14,7 +14,7 @@ class CreateApplication extends Component {
     link: "",
     error: "",
     classColor: "",
-    submitted: false
+    submitted: false,
   };
 
   editor = null;
@@ -105,38 +105,38 @@ class CreateApplication extends Component {
               required
               /> */}
             <div className="editor">
-            <CKEditor
-              onReady={(editor) => {
-                console.log("Editor is ready to use!", editor);
+              <CKEditor
+                onReady={(editor) => {
+                  console.log("Editor is ready to use!", editor);
 
-                // Insert the toolbar before the editable area.
-                editor.ui
-                  .getEditableElement()
-                  .parentElement.insertBefore(
-                    editor.ui.view.toolbar.element,
-                    editor.ui.getEditableElement()
-                  );
+                  // Insert the toolbar before the editable area.
+                  editor.ui
+                    .getEditableElement()
+                    .parentElement.insertBefore(
+                      editor.ui.view.toolbar.element,
+                      editor.ui.getEditableElement()
+                    );
 
-                this.editor = editor;
-              }}
-              onError={(error, { willEditorRestart }) => {
-                // If the editor is restarted, the toolbar element will be created once again.
-                // The `onReady` callback will be called again and the new toolbar will be added.
-                // This is why you need to remove the older toolbar.
-                if (willEditorRestart) {
-                  this.editor.ui.view.toolbar.element.remove();
+                  this.editor = editor;
+                }}
+                onError={(error, { willEditorRestart }) => {
+                  // If the editor is restarted, the toolbar element will be created once again.
+                  // The `onReady` callback will be called again and the new toolbar will be added.
+                  // This is why you need to remove the older toolbar.
+                  if (willEditorRestart) {
+                    this.editor.ui.view.toolbar.element.remove();
+                  }
+                }}
+                onChange={this.descChange}
+                editor={DecoupledEditor}
+                data={this.state.JobDescription}
+                config={
+                  {
+                    /* the editor configuration */
+                  }
                 }
-              }}
-              onChange={this.descChange}
-              editor={DecoupledEditor}
-              data={this.state.JobDescription}
-              config={
-                {
-                  /* the editor configuration */
-                }
-              }
               />
-              </div>
+            </div>
           </div>
           <div className="form-group spaceOut">
             <label>Date Applied</label>
@@ -171,15 +171,11 @@ class CreateApplication extends Component {
             </div>
           ) : (
             <div className="spaceOut">
-              <button
-                type="submit"
-                class="btn btn-primary "
-              >
+              <button type="submit" class="btn btn-primary ">
                 Submit
               </button>
             </div>
           )}
-
         </form>
         <div className="spaceout text-center">
           <p className={this.state.classColor}>&nbsp;{this.state.error}</p>

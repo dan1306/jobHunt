@@ -1,5 +1,4 @@
 import React from "react";
-// import Logo from "../../components/Logo/Logo";
 import CreateAnInterest from "../../components/InterestedJobs/CreateInterest";
 
 export default class CreateApplication extends React.Component {

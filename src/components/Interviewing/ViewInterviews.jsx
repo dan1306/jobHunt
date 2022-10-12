@@ -5,9 +5,11 @@ class Interviewing extends Component {
   state = {
     interviewing: [],
     editId: null,
-    RoundOfInterview: '',
-    InterviewDate: '',
-    editIntState: null
+    RoundOfInterview: "",
+    InterviewDate: "",
+    editIntState: null,
+    error: "",
+    classColor: "",
   };
 
   async componentDidMount() {
@@ -24,12 +26,18 @@ class Interviewing extends Component {
       editId: this.state.interviewing[n]["_id"],
       RoundOfInterview: this.state.interviewing[n]["RoundOfInterview"],
       InterviewDate: this.state.interviewing[n]["InterviewDate"],
-      editIntState: n
+      editIntState: n,
     });
   };
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    if (!this.state.RoundOfInterview || !this.state.InterviewDate) {
+      await this.setState({
+        error: `Fields can't be empty`,
+        classColor: "error-message",
+      });
+    }
     try {
       const data = {
         method: "PUT",
@@ -37,7 +45,7 @@ class Interviewing extends Component {
         body: JSON.stringify({
           id: this.state.editId,
           RoundOfInterview: this.state.RoundOfInterview,
-          InterviewDate: this.state.InterviewDate
+          InterviewDate: this.state.InterviewDate,
         }),
       };
 
@@ -47,11 +55,18 @@ class Interviewing extends Component {
         // await this.setState({editId: `Fields can't be empty`, classColor: 'error-message' })
       } else {
         console.log(fetchResponse);
-        let newArr = this.state.interviewing
+        let newArr = this.state.interviewing;
         // console.log(newArr[])
-        newArr[this.state.editIntState]['InterviewDate'] = this.state.InterviewDate
-        newArr[this.state.editIntState]['RoundOfInterview'] = this.state.RoundOfInterview
-        await this.setState({ editId: null,  interviewing: newArr});
+        newArr[this.state.editIntState]["InterviewDate"] =
+          this.state.InterviewDate;
+        newArr[this.state.editIntState]["RoundOfInterview"] =
+          this.state.RoundOfInterview;
+        await this.setState({
+          editId: null,
+          interviewing: newArr,
+          classColor: null,
+          error: "",
+        });
       }
     } catch (err) {
       console.log("Create Interest error", err);
@@ -75,24 +90,19 @@ class Interviewing extends Component {
         }),
       };
 
-      const fetchResponse = await fetch(
-        "/api/interviewing/delete",
-        options
-      );
+      const fetchResponse = await fetch("/api/interviewing/delete", options);
       if (!fetchResponse.ok) {
         console.log(fetchResponse);
       } else {
         console.log(fetchResponse);
-        let newInterestArr = this.state.interviewing
-        newInterestArr.splice(n, 1)
-       await this.setState({interviewing: newInterestArr})
+        let newInterestArr = this.state.interviewing;
+        newInterestArr.splice(n, 1);
+        await this.setState({ interviewing: newInterestArr });
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
-
-  
 
   render() {
     return (
@@ -130,6 +140,9 @@ class Interviewing extends Component {
                 Submit
               </button>
             </form>
+            <div className="spaceout text-center">
+              <h5 className={this.state.classColor}>&nbsp;{this.state.error}</h5>
+            </div>
           </div>
         ) : (
           <div className="intervContainer">
@@ -146,14 +159,18 @@ class Interviewing extends Component {
                   <p>Interview Date: {val.InterviewDate}</p>
                   <div className="moveRight">
                     <button
-                      onClick={() => { this.handleEdit(id) }}
+                      onClick={() => {
+                        this.handleEdit(id);
+                      }}
                       type="submit"
                       class="btn btn-primary spaceOut"
                     >
                       Edit
                     </button>
                     <button
-                      onClick={() => { this.handleDelete(id) }}
+                      onClick={() => {
+                        this.handleDelete(id);
+                      }}
                       type="submit"
                       class="btn btn-danger spaceOut"
                     >

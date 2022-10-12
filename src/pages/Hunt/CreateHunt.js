@@ -1,5 +1,4 @@
 import React from "react";
-// import Logo from "../../components/Logo/Logo";
 import CreateAJobHunt from "../../components/JobHunt/CreateHunt";
 
 export default class viewApplication extends React.Component {

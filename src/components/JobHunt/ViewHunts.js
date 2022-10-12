@@ -56,39 +56,47 @@ class VieweHunts extends Component {
 
   render() {
     return (
-      <div >
-        {this.state.huntList.map((val, id) => {
-          return (
-            <div className="huntDiv">
-              <div>
-                <h3>Hunt Title: {val.HuntName}</h3>
-                <p>
-                  Created On: {new Date(val.createdAt).toLocaleDateString()}{" "}
-                </p>
-              </div>
-              <div className="spaceTop">
-                <button
-                  onClick={() => {
-                    this.chosenHunt(id);
-                  }}
-                  class="btn btn-primary"
-                >
-                  Choose
-                </button>
+      <>
+        {this.state.huntList.length > 0 ? (
+          <div>
+            {this.state.huntList.map((val, id) => {
+              return (
+                <div className="huntDiv">
+                  <div>
+                    <h3>Hunt Title: {val.HuntName}</h3>
+                    <p>
+                      Created On: {new Date(val.createdAt).toLocaleDateString()}{" "}
+                    </p>
+                  </div>
+                  <div className="spaceTop">
+                    <button
+                      onClick={() => {
+                        this.chosenHunt(id);
+                      }}
+                      class="btn btn-primary"
+                    >
+                      Choose
+                    </button>
 
-                <button
-                  onClick={() => {
-                    this.handleDelete(id);
-                  }}
-                  class="btn btn-danger spaceBtn"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+                    <button
+                      onClick={() => {
+                        this.handleDelete(id);
+                      }}
+                      class="btn btn-danger spaceBtn"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div>
+            <h1>No Job Hunt's To Show</h1>
+          </div>
+        )}
+      </>
     );
   }
 }

@@ -45,6 +45,8 @@ async function getOffers(req, res) {
 
 async function editOffer(req, res) {
 
+    console.log(req.body)
+
     try {
         let edit = await Offer.findById(req.body.id)
         edit.PayPerYear = req.body.PayPerYear

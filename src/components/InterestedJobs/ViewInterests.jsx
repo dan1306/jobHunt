@@ -1,13 +1,7 @@
 import React, { Component } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2,
-} from "react-html-parser";
+import ReactHtmlParser from "react-html-parser";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import { Link } from "react-router-dom";
 import "./Interest.css";
 
 class ViewInterests extends Component {
@@ -18,6 +12,8 @@ class ViewInterests extends Component {
     jobTtile: "",
     viewInterest: null,
     editIntState: null,
+    error: "",
+    classColor: "",
   };
 
   editor = null;
@@ -74,30 +70,42 @@ class ViewInterests extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const data = {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: this.state.editId,
-          JobDescription: this.state.editJobDesc,
-        }),
-      };
+    if (!this.state.editJobDesc) {
+      await this.setState({
+        error: `Fields can't be empty`,
+        classColor: "error-message",
+      });
+    } else {
+      try {
+        const data = {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: this.state.editId,
+            JobDescription: this.state.editJobDesc,
+          }),
+        };
 
-      const fetchResponse = await fetch("/api/interested/editJobDesc", data);
-      if (!fetchResponse.ok) {
-        console.log(fetchResponse);
-        // await this.setState({editId: `Fields can't be empty`, classColor: 'error-message' })
-      } else {
-        console.log(fetchResponse);
-        let newArr = this.state.interestedJobs;
-        // console.log(newArr[])
-        newArr[this.state.editIntState]["JobDescription"] =
-          this.state.editJobDesc;
-        await this.setState({ editId: null, interestedJobs: newArr });
+        const fetchResponse = await fetch("/api/interested/editJobDesc", data);
+        if (!fetchResponse.ok) {
+          console.log(fetchResponse);
+          // await this.setState({editId: `Fields can't be empty`, classColor: 'error-message' })
+        } else {
+          console.log(fetchResponse);
+          let newArr = this.state.interestedJobs;
+          // console.log(newArr[])
+          newArr[this.state.editIntState]["JobDescription"] =
+            this.state.editJobDesc;
+          await this.setState({
+            editId: null,
+            interestedJobs: newArr,
+            error: "",
+            classColor: null,
+          });
+        }
+      } catch (err) {
+        console.log("Create Interest error", err);
       }
-    } catch (err) {
-      console.log("Create Interest error", err);
     }
   };
 
@@ -161,55 +169,68 @@ class ViewInterests extends Component {
                 Submit
               </button>
             </form>
+            <div className="spaceout text-center">
+              <h5 className={this.state.classColor}>
+                &nbsp;{this.state.error}
+              </h5>
+            </div>
           </div>
         ) : (
           <div>
             {
               <>
                 {!this.state.viewInterest ? (
-                  <div className="intContainer row">
-                    {this.state.interestedJobs.map((val, id) => {
-                      return (
-                        <div className="interestdivs col-lg-4 col-md-6 col-sm-12">
-                          <h1 className="text-center">{val.JobTitle}</h1>
-                          <div className="text-center">
-                            <p>
-                              Created On:{" "}
-                              {new Date(val.createdAt).toLocaleDateString()}
-                            </p>
-                          </div>
-                          <div className="text-center">
-                            <button
-                              className="btn btn-danger spaceout  btn-space"
-                              onClick={() => {
-                                this.handleDelete(id);
-                              }}
-                            >
-                              Delete
-                            </button>
+                  <>
+                    {this.state.interestedJobs.length > 0 ? (
+                      <div className="intContainer row">
+                        {this.state.interestedJobs.map((val, id) => {
+                          return (
+                            <div className="interestdivs col-lg-4 col-md-6 col-sm-12">
+                              <h1 className="text-center">{val.JobTitle}</h1>
+                              <div className="text-center">
+                                <p>
+                                  Created On:{" "}
+                                  {new Date(val.createdAt).toLocaleDateString()}
+                                </p>
+                              </div>
+                              <div className="text-center">
+                                <button
+                                  className="btn btn-danger spaceout  btn-space"
+                                  onClick={() => {
+                                    this.handleDelete(id);
+                                  }}
+                                >
+                                  Delete
+                                </button>
 
-                            <button
-                              className="btn btn-primary spaceout  btn-space"
-                              onClick={() => {
-                                this.handleEdit(id);
-                              }}
-                            >
-                              Edit
-                            </button>
+                                <button
+                                  className="btn btn-primary spaceout  btn-space"
+                                  onClick={() => {
+                                    this.handleEdit(id);
+                                  }}
+                                >
+                                  Edit
+                                </button>
 
-                            <button
-                              className="btn btn-success btn-space"
-                              onClick={() => {
-                                this.handleView(id);
-                              }}
-                            >
-                              View
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                                <button
+                                  className="btn btn-success btn-space"
+                                  onClick={() => {
+                                    this.handleView(id);
+                                  }}
+                                >
+                                  View
+                                </button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className="intContainer">
+                        <h1> No Job Interests To Show</h1>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="viewJobInterest">
                     <h1 className="job-title">

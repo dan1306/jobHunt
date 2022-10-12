@@ -1,5 +1,4 @@
 import React from "react";
-// import Logo from "../../components/Logo/Logo";
 import ViewJobHunt from "../../components/JobHunt/ViewHunts";
 
 export default class viewHunts extends React.Component {
