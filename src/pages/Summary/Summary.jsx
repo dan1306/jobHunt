@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Summary from "../../components/Summary/Summary";
 
-class Summary extends Component {
+class Summarize extends Component {
+  render() {
+    return (
+      <>
+        <h1>{this.props.userId} Summarize</h1>
 
-    render() {
-      return (
-        <header className="App-header"> <h1> Summary </h1> </header> 
-      );
-    }
+        <Summary huntId={this.props.huntId} userId={this.props.userId} />
+      </>
+    );
   }
-  
-  export default Summary;
+}
+
+export default Summarize;

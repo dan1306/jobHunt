@@ -20,7 +20,6 @@ import CreateInterview from "./pages/Interviewing/CreateInterview";
 import ViewInterviews from "./pages/Interviewing/ViewInterviews";
 import Congrats from "./pages/Congrats/Congrats";
 
-
 class App extends Component {
   state = {
     user: null,
@@ -86,7 +85,15 @@ class App extends Component {
           <>
             {this.state.huntChosen ? (
               <Routes>
-                <Route path="/summary" element={<Summary />} />
+                <Route
+                  path="/summary"
+                  element={
+                    <Summary
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
+                />
                 <Route
                   path="/viewInterests"
                   element={

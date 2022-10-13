@@ -2,6 +2,11 @@ import React from "react";
 import ViewJobHunt from "../../components/JobHunt/ViewHunts";
 
 export default class viewHunts extends React.Component {
+
+  componentDidMount() {
+    
+  }
+  
   render() {
     return (
       <>

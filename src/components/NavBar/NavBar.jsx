@@ -83,7 +83,7 @@ export default class NavBar extends Component {
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item>
-                        <Link to="/interviewQuestions" className="rm-underline">
+                        <Link to="/summary" className="rm-underline">
                           Summary
                         </Link>
                       </NavDropdown.Item>

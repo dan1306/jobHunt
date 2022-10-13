@@ -22,14 +22,6 @@ async function create(req, res) {
 }
 
 async function getHunt(req, res) {
-  // if (req.user) {
-  //     console.log(req.user)
-  //     res.status(200).json('all good')
-  // } else {
-  //     console.log('user MIA')
-  //     res.status(400).json('NOT all good')
-
-  // }
 
   Hunt.find({ userId: req.user._id }, (err, hunts) => {
     if (err) {

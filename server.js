@@ -17,13 +17,15 @@ app.use(express.json());
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.use(require('./config/auth'));
+
 app.use('/api/users', require('./routes/api/users'));
+app.use(require('./config/auth'));
 app.use('/api/interviewing', require('./routes/api/interviewing'));
 app.use('/api/applied', require('./routes/api/applied'));
 app.use('/api/interested', require('./routes/api/interested'));
 app.use('/api/offer', require('./routes/api/offer'));
 app.use('/api/hunt', require('./routes/api/hunt'));
+app.use('/api/summary', require('./routes/api/summary'));
 
 
 
