@@ -3,10 +3,16 @@ const Schema = mongoose.Schema;
 
 
 const offerSchema = new Schema({
+    Company: { type: String, required: true },
     JobTitle: { type: String, required: true },
-    PayPerYear: { type: String, required: true },
+    PayPerYear: { type: Number, required: true },
     starDate: { type: String, required: true },
-    userId: { type: String }
+    offerExpires:  { type: String, required: true },
+    userId: { type: String },
+    Accepted: {
+        type: Boolean,
+        default: false,
+      }
 }, {
     timestamps: true,
 })

@@ -75,19 +75,20 @@ export default class NavBar extends Component {
                       </NavDropdown.Item>
                     </NavDropdown>
 
-                    <NavDropdown title="Interview Prep" id="basic-nav-dropdown">
+                    <NavDropdown title="Congrats" id="basic-nav-dropdown">
                       <NavDropdown.Item>
-                        <Link to="/resume" className="rm-underline">
-                          Resume
+                        <Link to="/Congrats" className="rm-underline">
+                          Accepted Offer
                         </Link>
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item>
                         <Link to="/interviewQuestions" className="rm-underline">
-                          Interview Questions And Answers
+                          Summary
                         </Link>
                       </NavDropdown.Item>
                     </NavDropdown>
+
                     <Nav.Link
                       href="#home"
                       onClick={async () => {

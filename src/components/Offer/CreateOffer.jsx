@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 class CreateOffer extends Component {
   state = {
+    Company: "",
     JobTitle: "",
     PayPerYear: 0,
     starDate: null,
@@ -11,6 +12,7 @@ class CreateOffer extends Component {
     submitted: false,
     error: "",
     classColor: "",
+    offerExpires: null
   };
 
   handleChange = (e) => {
@@ -27,10 +29,12 @@ class CreateOffer extends Component {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          Company: this.state.Company,
           JobTitle: this.state.JobTitle,
-          PayPerYear: this.state.PayPerYear,
+          PayPerYear: Number(this.state.PayPerYear),
           starDate: this.state.starDate,
           userId: this.state.userId,
+          offerExpires: this.state.offerExpires,
           id: this.props.huntId,
         }),
       };
@@ -60,6 +64,17 @@ class CreateOffer extends Component {
       <div className="offerDiv">
         <h1> Create An Offer </h1>
         <form onSubmit={this.handleSubmit}>
+          <div className="form-group spaceOut">
+            <label>Company: </label>
+            <input
+              type="text"
+              className="form-control"
+              name="Company"
+              value={this.state.Company}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
           <div className="form-group spaceOut">
             <label>Job Title: </label>
             <input
@@ -93,6 +108,17 @@ class CreateOffer extends Component {
               required
             />
           </div>
+          <div className="form-group spaceOut">
+            <label>Offer Expires On:</label>
+            <input
+              type="date"
+              className="form-control"
+              name="offerExpires"
+              value={this.state.offerExpires}
+              onChange={this.handleChange}
+              required
+            />
+          </div>
           {this.state.submitted ? (
             <div className="spaceOut">
               <Link to="/viewOffers">
@@ -110,7 +136,7 @@ class CreateOffer extends Component {
           )}
         </form>
         <div className="spaceout text-center">
-          <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
+          <h3 className={this.state.classColor}>&nbsp;{this.state.error}</h3>
         </div>
       </div>
     );

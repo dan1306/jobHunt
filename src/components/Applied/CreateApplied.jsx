@@ -11,7 +11,6 @@ class CreateApplication extends Component {
     DateApplied: "",
     userId: this.props.userId,
     CompanyName: "",
-    link: "",
     error: "",
     classColor: "",
     submitted: false,
@@ -43,7 +42,6 @@ class CreateApplication extends Component {
           userId: this.state.userId,
           id: this.props.huntId,
           CompanyName: this.state.CompanyName,
-          link: this.state.link,
         }),
       };
 
@@ -149,17 +147,7 @@ class CreateApplication extends Component {
               required
             />
           </div>
-          <div className="form-group spaceOut">
-            <label>Paste Job Link Here: </label>
-            <input
-              type="text"
-              className="form-control"
-              name="link"
-              value={this.state.link}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
+
 
           {this.state.submitted ? (
             <div className="spaceOut">

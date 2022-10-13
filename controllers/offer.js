@@ -5,7 +5,9 @@ module.exports = {
     create,
     getOffers,
     editOffer,
-    deleteOffer
+    deleteOffer,
+    acceptedOffer,
+    declineOffer
 };
 
 async function create(req, res) {
@@ -14,9 +16,11 @@ async function create(req, res) {
 
         let newOffer = new Offer()
         newOffer.JobTitle = req.body.JobTitle
+        newOffer.Company = req.body.Company
         newOffer.PayPerYear = req.body.PayPerYear
         newOffer.starDate = req.body.starDate
         newOffer.userId = req.body.userId
+        newOffer.offerExpires = req.body.offerExpires
         newOffer = await newOffer.save()
         
         let hunt = await Hunt.findById(req.body.id)
@@ -51,6 +55,7 @@ async function editOffer(req, res) {
         let edit = await Offer.findById(req.body.id)
         edit.PayPerYear = req.body.PayPerYear
         edit.starDate = req.body.starDate
+        edit.offerExpires = req.body.offerExpires
         edit = await edit.save()
         console.log(edit)
         res.status(200).json("all good")
@@ -84,4 +89,37 @@ async function deleteOffer(req, res) {
     }
     
 
+}
+
+async function acceptedOffer(req, res) {
+
+    console.log(req.body)
+
+    try {
+        let edit = await Offer.findById(req.body.id)
+        edit.Accepted = true
+        await edit.save()
+        res.status(200).json("all good")
+
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
+}
+
+async function declineOffer(req, res) { 
+    console.log(req.body)
+    try {
+        let edit = await Offer.findById(req.body.id)
+        edit.Accepted = false
+        edit.save()
+        res.status(200).json("all good")
+
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
+    
 }

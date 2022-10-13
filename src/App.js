@@ -18,6 +18,8 @@ import VieweHunts from "./pages/Hunt/ViewHunts";
 import CreateHunt from "./pages/Hunt/CreateHunt";
 import CreateInterview from "./pages/Interviewing/CreateInterview";
 import ViewInterviews from "./pages/Interviewing/ViewInterviews";
+import Congrats from "./pages/Congrats/Congrats";
+
 
 class App extends Component {
   state = {
@@ -159,6 +161,17 @@ class App extends Component {
                     />
                   }
                 />
+
+                <Route
+                  path="/Congrats"
+                  element={
+                    <Congrats
+                      userId={this.state.user._id}
+                      huntId={this.state.huntId}
+                    />
+                  }
+                />
+
                 <Route path="/resume" element={<Resume />} />
                 <Route
                   path="/interviewQuestions"

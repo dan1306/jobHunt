@@ -17,7 +17,6 @@ async function create(req, res) {
     newApplication.JobDescription = req.body.JobDescription;
     newApplication.userId = req.body.userId;
     newApplication.CompanyName = req.body.CompanyName;
-    newApplication.link = req.body.link;
     newApplication = await newApplication.save();
 
     let hunt = await Hunt.findById(req.body.id);

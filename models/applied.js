@@ -7,7 +7,6 @@ const appliedSchema = new Schema({
     JobTitle: { type: String, required: true },
     JobDescription: { type: String, required: true },
     DateApplied: { type: String, required: true },
-    link: { type: String, required: true },
     userId: { type: String }
 
 }, {

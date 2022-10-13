@@ -10,4 +10,9 @@ router.put('/edit', offertCtrl.editOffer)
 
 router.delete('/delete', offertCtrl.deleteOffer)
 
+router.put('/acceptOffer', offertCtrl.acceptedOffer)
+
+router.put('/declineOffer', offertCtrl.declineOffer)
+
+
 module.exports = router;

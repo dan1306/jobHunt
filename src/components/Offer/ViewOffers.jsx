@@ -3,20 +3,38 @@ import "./Offer.css";
 
 class Offer extends Component {
   state = {
+    Company: "",
+    JobTitle: "",
     offers: [],
     editId: null,
     starDate: "",
     PayPerYear: "",
     editIntState: null,
+    offerExpires: null,
     error: "",
     classColor: "",
+    acceptedOffer: false,
+    offerAcc: null,
   };
 
   async componentDidMount() {
     let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
     getOffers = await getOffers.json();
-    this.setState({ offers: getOffers, error: '' });
+    getOffers.sort((a, b) => {
+      return a.PayPerYear - b.PayPerYear;
+    });
+    await this.setState({ offers: getOffers, error: "" });
     console.log(this.state);
+
+    for (let i = 0; i < this.state.offers.length; i++) {
+      if (this.state.offers[i]["Accepted"]) {
+        await this.setState({
+          acceptedOffer: true,
+          offerAcc: "An Offer Has Been Accepted",
+        });
+        break;
+      }
+    }
   }
 
   handleChange = (e) => {
@@ -27,23 +45,29 @@ class Offer extends Component {
 
   handleEdit = async (n) => {
     await this.setState({
+      Company: this.state.offers[n]["Company"],
+      JobTitle: this.state.offers[n]["JobTitle"],
       editId: this.state.offers[n]["_id"],
       starDate: this.state.offers[n]["starDate"],
       PayPerYear: this.state.offers[n]["PayPerYear"],
+      offerExpires: this.state.offers[n]["offerExpires"],
       editIntState: n,
     });
   };
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!this.state.starDate || !this.state.PayPerYear) {
+
+    if (
+      !isNaN(this.state.starDate) ||
+      !this.state.PayPerYear ||
+      !this.state.offerExpires
+    ) {
       await this.setState({
         error: `Fields can't be empty`,
         classColor: "error-message",
       });
     } else {
- 
       try {
         const data = {
           method: "PUT",
@@ -51,33 +75,69 @@ class Offer extends Component {
           body: JSON.stringify({
             id: this.state.editId,
             starDate: this.state.starDate,
-            PayPerYear: this.state.PayPerYear,
+            PayPerYear: Number(this.state.PayPerYear),
+            offerExpires: this.state.offerExpires,
           }),
         };
-  
+
         const fetchResponse = await fetch("api/offer/edit", data);
         if (!fetchResponse.ok) {
           console.log(fetchResponse);
-         
         } else {
           console.log(fetchResponse);
           let newArr = this.state.offers;
           // console.log(newArr[])
           newArr[this.state.editIntState]["starDate"] = this.state.starDate;
           newArr[this.state.editIntState]["PayPerYear"] = this.state.PayPerYear;
+          newArr[this.state.editIntState]["offerExpires"] =
+            this.state.offerExpires;
+          newArr.sort((a, b) => {
+            return a.PayPerYear - b.PayPerYear;
+          });
           await this.setState({
             editId: null,
             offers: newArr,
             classColor: null,
-            error: ''
+            error: "",
           });
         }
       } catch (err) {
         console.log("Create Interest error", err);
       }
     }
-    
-   
+  };
+
+  acceptedOffer = async (n) => {
+    console.log(this.state.offers[n]["_id"]);
+    try {
+      const data = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: this.state.offers[n]["_id"],
+        }),
+      };
+
+      const fetchResponse = await fetch("api/offer/acceptOffer", data);
+
+      if (fetchResponse.ok) {
+        console.log(fetchResponse);
+        let newArr = this.state.offers;
+        newArr[n]["Accepted"] = true;
+        newArr.sort((a, b) => {
+          return a.PayPerYear - b.PayPerYear;
+        });
+        await this.setState({
+          offers: newArr,
+          acceptedOffer: true,
+          offerAcc: "An Offer Has Been Accepted",
+        });
+      } else {
+        console.log(fetchResponse);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   handleDelete = async (n) => {
@@ -97,6 +157,9 @@ class Offer extends Component {
       } else {
         console.log(fetchResponse);
         let newOfferArr = this.state.offers;
+        if (newOfferArr[n]["Accepted"]) {
+          await this.setState({ acceptedOffer: false, offerAcc: null });
+        }
         newOfferArr.splice(n, 1);
         await this.setState({ offers: newOfferArr });
       }
@@ -110,6 +173,9 @@ class Offer extends Component {
       <>
         {this.state.editId ? (
           <div className="interviewDiv">
+            <h2 className="text-center">
+              {this.state.Company}: {this.state.JobTitle}
+            </h2>
             <form>
               <div className="form-group spaceOut">
                 <label>Pay Per Year: </label>
@@ -133,6 +199,17 @@ class Offer extends Component {
                   required
                 />
               </div>
+              <div className="form-group spaceOut">
+                <label>offer Expires: </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  name="offerExpires"
+                  value={this.state.offerExpires}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
               <button
                 onClick={this.handleSubmit}
                 type="submit"
@@ -141,30 +218,46 @@ class Offer extends Component {
                 Submit
               </button>
             </form>
-            <div className="spaceout text-center">
-              <h5 className={this.state.classColor}>&nbsp;{this.state.error}</h5>
+            <div className="spaceout">
+              <h5 className={this.state.classColor}>
+                &nbsp;{this.state.error}
+              </h5>
             </div>
           </div>
         ) : (
           <>
+            <h3 className="text-center accOffer"> {this.state.offerAcc}</h3>
             {this.state.offers.length > 0 ? (
               <div className="offerContainer">
                 {this.state.offers.map((val, id) => {
                   return (
                     <div className="offerDiv">
-                      <h1>Job Title: {val.JobTitle}</h1>
+                      <h1>
+                        {val.JobTitle} At {val.Company}{" "}
+                      </h1>
                       <br />
-                      <h3>Pay Per Year: ${val.PayPerYear}</h3>
+                      <h3>${val.PayPerYear} / Year</h3>
                       <br />
                       <p>Start Date: {val.starDate}</p>
+                      <p>offer Expires On: {val.offerExpires}</p>
+
                       <div className="moveRight">
-                        <button
-                          // onClick={this.handleSubmit}
-                          type="submit"
-                          class="btn btn-success spaceOut"
-                        >
-                          Accept
-                        </button>
+                        <>
+                          {!this.state.acceptedOffer ? (
+                            <button
+                              onClick={() => {
+                                this.acceptedOffer(id);
+                              }}
+                              type="submit"
+                              class="btn btn-success spaceOut"
+                            >
+                              Accept
+                            </button>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+
                         <button
                           onClick={() => {
                             this.handleEdit(id);
