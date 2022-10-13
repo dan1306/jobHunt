@@ -3,6 +3,7 @@ import ReactHtmlParser from "react-html-parser";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import "./Interest.css";
+import { Link } from "react-router-dom";
 
 class ViewInterests extends Component {
   state = {
@@ -89,11 +90,9 @@ class ViewInterests extends Component {
         const fetchResponse = await fetch("/api/interested/editJobDesc", data);
         if (!fetchResponse.ok) {
           console.log(fetchResponse);
-          // await this.setState({editId: `Fields can't be empty`, classColor: 'error-message' })
         } else {
           console.log(fetchResponse);
           let newArr = this.state.interestedJobs;
-          // console.log(newArr[])
           newArr[this.state.editIntState]["JobDescription"] =
             this.state.editJobDesc;
           await this.setState({
@@ -115,6 +114,10 @@ class ViewInterests extends Component {
     } else {
       this.setState({ viewInterest: null });
     }
+  };
+
+  back = async () => {
+    this.setState({ editId: null });
   };
 
   render() {
@@ -168,6 +171,11 @@ class ViewInterests extends Component {
               >
                 Submit
               </button>
+              <Link to="/viewInterests">
+                <button onClick={this.back} className="btn btn-danger spaceOut">
+                  Return To Interest List
+                </button>
+              </Link>
             </form>
             <div className="spaceout text-center">
               <h5 className={this.state.classColor}>
@@ -182,7 +190,7 @@ class ViewInterests extends Component {
                 {!this.state.viewInterest ? (
                   <>
                     {this.state.interestedJobs.length > 0 ? (
-                      <div className="intContainer row">
+                      <div className="intContainer row ">
                         {this.state.interestedJobs.map((val, id) => {
                           return (
                             <div className="interestdivs col-lg-4 col-md-6 col-sm-12">
@@ -226,29 +234,33 @@ class ViewInterests extends Component {
                         })}
                       </div>
                     ) : (
-                      <div className="intContainer">
+                      <div className="noInterest">
                         <h1> No Job Interests To Show</h1>
                       </div>
                     )}
                   </>
                 ) : (
-                  <div className="viewJobInterest">
-                    <h1 className="job-title">
-                      {this.state.viewInterest.JobTitle}
-                    </h1>
+                  <div className="pad">
+                    <div className="viewJobInterest ">
+                      <h1 className="job-title">
+                        {this.state.viewInterest.JobTitle}
+                      </h1>
 
-                    <div className="jobDesc">
-                      {ReactHtmlParser(this.state.viewInterest.JobDescription)}
-                    </div>
-                    <div className="text-center">
-                      <button
-                        className="btn btn-success spaceout"
-                        onClick={() => {
-                          this.handleView();
-                        }}
-                      >
-                        Return To Interest List
-                      </button>
+                      <div className="jobDesc">
+                        {ReactHtmlParser(
+                          this.state.viewInterest.JobDescription
+                        )}
+                      </div>
+                      <div className="text-center">
+                        <button
+                          className="btn btn-success spaceout"
+                          onClick={() => {
+                            this.handleView();
+                          }}
+                        >
+                          Return To Interest List
+                        </button>
+                      </div>
                     </div>
                   </div>
                 )}

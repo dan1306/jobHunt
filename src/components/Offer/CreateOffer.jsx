@@ -63,7 +63,7 @@ class CreateOffer extends Component {
     return (
       <div className="pad">
       <div className="offerDiv">
-        <h1> Create An Offer </h1>
+        <h1 className="text-center"> Create An Offer </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group spaceOut">
             <label>Company: </label>

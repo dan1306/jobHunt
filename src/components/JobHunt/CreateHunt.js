@@ -81,9 +81,16 @@ class CreateHunt extends Component {
                   </Link>
                 </div>
               ) : (
-                <button type="submit" class="btn btn-primary spaceOut">
-                  Submit
-                </button>
+                <>
+                  <button type="submit" class="btn btn-primary spaceOut">
+                    Submit
+                  </button>
+                  <Link to="/viewHunts">
+                  <button className="btn btn-danger spaceOut">
+                    Return To Hunt List
+                  </button>
+                </Link>
+                </>
               )}
             </>
           }

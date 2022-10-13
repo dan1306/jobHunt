@@ -22,7 +22,6 @@ async function create(req, res) {
 }
 
 async function getHunt(req, res) {
-
   Hunt.find({ userId: req.user._id }, (err, hunts) => {
     if (err) {
       res.status(500).json(err);

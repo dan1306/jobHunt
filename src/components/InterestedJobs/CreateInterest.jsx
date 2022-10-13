@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2,
-} from "react-html-parser";
 import "./Interest.css";
 import { Link } from "react-router-dom";
 
@@ -68,7 +63,7 @@ class CreateInterest extends Component {
   render() {
     return (
       <div className="ckBorder">
-        <h1>Create A Job Of Interest</h1>
+        <h1 className="text-center">Create A Job Of Interest</h1>
 
         <form>
           <div className="form-group spaceOut">
@@ -129,14 +124,19 @@ class CreateInterest extends Component {
               </Link>
             </div>
           ) : (
-            <div className="spaceOut">
+            <div >
               <button
                 onClick={this.handleSubmit}
                 type="submit"
-                class="btn btn-primary "
+                className="btn btn-primary spaceOut"
               >
                 Submit
               </button>
+              <Link to="/viewInterests">
+                <button className="btn btn-danger spaceOut">
+                  Return To Interest List
+                </button>
+              </Link>
             </div>
           )}
         </form>

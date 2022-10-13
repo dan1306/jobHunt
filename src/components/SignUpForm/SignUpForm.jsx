@@ -1,5 +1,5 @@
 import { Component } from "react";
-import './SignUpForm.css'
+import "./SignUpForm.css";
 
 export default class SignUpForm extends Component {
   state = {
@@ -25,21 +25,20 @@ export default class SignUpForm extends Component {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: this.state.name, 
-          email: this.state.email, 
-          password: this.state.password 
-        })
-      }
-      const fetchResponse = await fetch('/api/users/signup', options)
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+        }),
+      };
+      const fetchResponse = await fetch("/api/users/signup", options);
 
-      if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
+      if (!fetchResponse.ok) throw new Error("Fetch failed - Bad request");
 
-      let token = await fetchResponse.json()
-      localStorage.setItem('token', token)
+      let token = await fetchResponse.json();
+      localStorage.setItem("token", token);
 
-      let user = JSON.parse(atob(token.split('.')[1])).user
-      this.props.setUserInState(user)
-
+      let user = JSON.parse(atob(token.split(".")[1])).user;
+      this.props.setUserInState(user);
     } catch (err) {
       console.log("SignupForm error", err);
       this.setState({ error: "Sign Up Failed - Try Again" });
@@ -51,26 +50,20 @@ export default class SignUpForm extends Component {
     return (
       <div className="signUp-form-container">
         <div>
-          
-
-
-        <form autoComplete="off" onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label>Name</label>
-            <input
+          <form autoComplete="off" onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <label>Name:</label>
+              <input
                 type="text"
                 name="name"
                 value={this.state.name}
                 className="form-control"
                 onChange={this.handleChange}
-                required 
-                
+                required
               />
-          </div>
-          <div class="form-group">
-              <label>
-                Email
-              </label>
+            </div>
+            <div class="form-group">
+              <label>Email:</label>
               <input
                 type="email"
                 name="email"
@@ -78,12 +71,10 @@ export default class SignUpForm extends Component {
                 onChange={this.handleChange}
                 value={this.state.email}
                 required
-                />
+              />
             </div>
             <div class="form-group">
-              <label>
-                Password
-              </label>
+              <label>Password:</label>
               <input
                 type="password"
                 name="password"
@@ -94,9 +85,7 @@ export default class SignUpForm extends Component {
               />
             </div>
             <div className="form-group">
-              <label>
-                Confirm
-              </label>
+              <label>Confirm:</label>
               <input
                 type="password"
                 name="confirm"
@@ -106,13 +95,16 @@ export default class SignUpForm extends Component {
                 required
               />
             </div>
-            
-          <button type="submit" className="btn btn-primary signUp-btn" disabled={disable}>SIGN UP</button>
-        </form>
-
-
-
-
+            <div className="text-center">
+              <button
+                type="submit"
+                className="btn btn-primary signUp-btn"
+                disabled={disable}
+              >
+                SIGN UP
+              </button>
+            </div>
+          </form>
         </div>
         <p className="error-message">&nbsp;{this.state.error}</p>
       </div>

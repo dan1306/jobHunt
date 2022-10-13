@@ -92,7 +92,7 @@ class VieweHunts extends Component {
             })}
           </div>
         ) : (
-          <div>
+          <div className="noHunts">
             <h1>No Job Hunt's To Show</h1>
           </div>
         )}

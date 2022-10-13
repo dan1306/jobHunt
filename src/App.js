@@ -6,7 +6,6 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Summary from "./pages/Summary/Summary";
 import Applied from "./pages/Applied/Applied";
 import CreateApplication from "./pages/Applied/CreateApplication";
-import Interviewing from "./pages/Interviewing/ViewInterviews";
 import Accepted from "./pages/Accepted/Accepted";
 import Offer from "./pages/Offer/Offer";
 import Resume from "./pages/Resume/Resume";

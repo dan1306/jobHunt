@@ -61,7 +61,7 @@ class CreateInterview extends Component {
     return (
       <div className="pad">
         <div className="interviewDiv">
-          <h1> Create An Interview </h1>
+          <h1 className="text-center"> Create An Interview </h1>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group spaceOut">
               <label>Company Name: </label>

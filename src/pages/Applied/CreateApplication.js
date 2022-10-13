@@ -6,7 +6,6 @@ export default class CreateApplication extends React.Component {
   render() {
     return (
       <>
-        <h1>{this.props.userId} </h1>
         <CreateApplied huntId={this.props.huntId} userId={this.props.userId} />
       </>
     );

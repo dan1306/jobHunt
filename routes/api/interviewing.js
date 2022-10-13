@@ -1,13 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const interviewingtCtrl = require('../../controllers/interviewing');
+const interviewingtCtrl = require("../../controllers/interviewing");
 
-router.post('/create', interviewingtCtrl.create);
+router.post("/create", interviewingtCtrl.create);
 
-router.get('/getInterviews/:id', interviewingtCtrl.getInterviews);
+router.get("/getInterviews/:id", interviewingtCtrl.getInterviews);
 
-router.put('/edit', interviewingtCtrl.editInterview)
+router.put("/edit", interviewingtCtrl.editInterview);
 
-router.delete('/delete', interviewingtCtrl.deleteInterview)
+router.delete("/delete", interviewingtCtrl.deleteInterview);
 
 module.exports = router;

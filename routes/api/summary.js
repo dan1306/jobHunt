@@ -1,8 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const summaryCtrl = require('../../controllers/summary');
+const summaryCtrl = require("../../controllers/summary");
 
-router.get('/:id', summaryCtrl.getJobHunt);
-
+router.get("/:id", summaryCtrl.getJobHunt);
 
 module.exports = router;

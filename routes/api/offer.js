@@ -1,18 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const offertCtrl = require('../../controllers/offer');
+const offertCtrl = require("../../controllers/offer");
 
-router.post('/create', offertCtrl.create);
+router.post("/create", offertCtrl.create);
 
-router.get('/getOffers/:id', offertCtrl.getOffers);
+router.get("/getOffers/:id", offertCtrl.getOffers);
 
-router.put('/edit', offertCtrl.editOffer)
+router.put("/edit", offertCtrl.editOffer);
 
-router.delete('/delete', offertCtrl.deleteOffer)
+router.delete("/delete", offertCtrl.deleteOffer);
 
-router.put('/acceptOffer', offertCtrl.acceptedOffer)
+router.put("/acceptOffer", offertCtrl.acceptedOffer);
 
-router.put('/declineOffer', offertCtrl.declineOffer)
-
+router.put("/declineOffer", offertCtrl.declineOffer);
 
 module.exports = router;

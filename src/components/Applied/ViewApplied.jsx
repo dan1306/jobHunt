@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import "./Applied.css";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2,
-} from "react-html-parser";
+import ReactHtmlParser from "react-html-parser";
 
 class Applied extends Component {
   state = {
@@ -122,11 +118,15 @@ class Applied extends Component {
     }
   };
 
+  back = async () => {
+    this.setState({ editId: null });
+  };
+
   render() {
     return (
       <div>
         {this.state.editId ? (
-          <div className="ckBorder">
+          <div className="appliedDiv">
             <h1 className="job-title">{this.state.jobTtile}</h1>
 
             <form>
@@ -172,6 +172,9 @@ class Applied extends Component {
                 class="btn btn-primary spaceOut"
               >
                 Submit
+              </button>
+              <button onClick={this.back} className="btn btn-danger spaceOut">
+                Back To Applications List
               </button>
             </form>
             <div className="spaceout text-center">
@@ -226,29 +229,32 @@ class Applied extends Component {
                     })}
                   </div>
                 ) : (
-                  <div className="appliedContainer">
+                  <div className="appliedContainer noApplications">
                     <h1>No Applications To Show</h1>
                   </div>
                 )}
               </>
             ) : (
-              <div className="viewJobInterest ">
-                <h1 className="job-title">
-                  {this.state.viewApplication.JobTitle}
-                </h1>
+              <div className="pad">
+                <div className="viewJobInterest">
+                  <h1 className="job-title">
+                    {this.state.viewApplication.CompanyName} :{" "}
+                    {this.state.viewApplication.JobTitle}
+                  </h1>
 
-                <div className="jobDesc">
-                  {ReactHtmlParser(this.state.viewApplication.JobDescription)}
-                </div>
-                <div className="text-center">
-                  <button
-                    className="btn btn-success spaceout"
-                    onClick={() => {
-                      this.handleView();
-                    }}
-                  >
-                    Return To Interest List
-                  </button>
+                  <div className="jobDesc">
+                    {ReactHtmlParser(this.state.viewApplication.JobDescription)}
+                  </div>
+                  <div className="text-center">
+                    <button
+                      className="btn btn-success spaceout"
+                      onClick={() => {
+                        this.handleView();
+                      }}
+                    >
+                      Return To Applications List
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
