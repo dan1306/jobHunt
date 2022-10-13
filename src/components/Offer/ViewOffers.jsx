@@ -86,7 +86,6 @@ class Offer extends Component {
         } else {
           console.log(fetchResponse);
           let newArr = this.state.offers;
-          // console.log(newArr[])
           newArr[this.state.editIntState]["starDate"] = this.state.starDate;
           newArr[this.state.editIntState]["PayPerYear"] = this.state.PayPerYear;
           newArr[this.state.editIntState]["offerExpires"] =
@@ -168,6 +167,10 @@ class Offer extends Component {
     }
   };
 
+  back = async () => {
+    this.setState({ editId: null });
+  };
+
   render() {
     return (
       <>
@@ -217,6 +220,12 @@ class Offer extends Component {
               >
                 Submit
               </button>
+              <button
+                onClick={this.back}
+                class="btn btn-danger spaceOut"
+              >
+                Back To Offer List
+              </button>
             </form>
             <div className="spaceout">
               <h5 className={this.state.classColor}>
@@ -226,9 +235,10 @@ class Offer extends Component {
           </div>
         ) : (
           <>
-            <h3 className="text-center accOffer"> {this.state.offerAcc}</h3>
             {this.state.offers.length > 0 ? (
               <div className="offerContainer">
+                <h2 className="text-center accOffer"> {this.state.offerAcc}</h2>
+
                 {this.state.offers.map((val, id) => {
                   return (
                     <div className="offerDiv">
@@ -282,7 +292,7 @@ class Offer extends Component {
                 })}
               </div>
             ) : (
-              <div className="offerContainer">
+              <div className="noOffers">
                 <h1>No Offers To Show</h1>
               </div>
             )}

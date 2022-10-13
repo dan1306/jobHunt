@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Congrats.css";
 
 class Offer extends Component {
   state = {
@@ -27,7 +28,9 @@ class Offer extends Component {
     try {
       const data = {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           id: id,
         }),
@@ -36,7 +39,10 @@ class Offer extends Component {
       const fetchResponse = await fetch("/api/offer/declineOffer", data);
       if (fetchResponse.ok) {
         console.log(fetchResponse, "success");
-        await this.setState({ offers: null, offerAccepted: false });
+        await this.setState({
+          offers: null,
+          offerAccepted: false,
+        });
       } else {
         console.log(fetchResponse);
       }
@@ -47,29 +53,42 @@ class Offer extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.huntId}
+      <div className="congratsDiv">
         {this.state.offerAccepted["Company"]}
         {this.state.offerAccepted ? (
-          <div className="App-header">
-            <h1>{this.state.offers["Company"]}</h1>
-            <h2>{this.state.offers["JobTitle"]} </h2>
-            <h3>{this.state.offers["PayPerYear"]} </h3>
-            <h4> {this.state.offers["starDate"]} </h4>
-            <button
-              className="btn btn-danger btn-space"
-              onClick={() => {
-                this.declineoffer(this.state.id);
-              }}
-            >
-              Decline
-            </button>
+          <div className="showCongrats">
+            <h1 className="text-center"> 🎊Congratultaions🎊 </h1>
+            <div className="congratsMessage">
+              <p className="text-center">
+                {" "}
+                You Have Accepted A Job At{" "}
+                <span className="bold">{this.state.offers["Company"]}</span> As
+                A <span className="bold">{this.state.offers["JobTitle"]}</span>,
+                Paying{" "}
+                <span className="bold">
+                  ${this.state.offers["PayPerYear"]}/Year{" "}
+                </span>{" "}
+                Starting{" "}
+                <span className="bold">{this.state.offers["starDate"]}</span>
+              </p>
+            </div>
+
+            <div className="text-center">
+              <button
+                className="btn btn-danger btn-space"
+                onClick={() => {
+                  this.declineoffer(this.state.id);
+                }}
+              >
+                Decline Offer
+              </button>
+            </div>
           </div>
         ) : (
           <>
-            <h1>No offer Has been Accepted</h1>
+            <h1> No Offer Has been Accepted Yet </h1>
           </>
-        )}
+        )}{" "}
       </div>
     );
   }

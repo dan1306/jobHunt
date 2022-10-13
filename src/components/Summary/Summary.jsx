@@ -33,8 +33,8 @@ class Summary extends Component {
 
   render() {
     return (
-      <header className="App-header">
-        <h1> hi </h1>
+      <div className="App-header summaryGrid">
+        <h3 className="summaryHeader"> Hunt Summary </h3>
         <table>
           <tr>
             <td>Shown Interest</td>
@@ -57,7 +57,7 @@ class Summary extends Component {
             <td>{this.state.acceptedOffer}</td>
           </tr>
         </table>
-      </header>
+      </div>
     );
   }
 }

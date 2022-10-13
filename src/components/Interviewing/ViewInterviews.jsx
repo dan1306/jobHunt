@@ -104,6 +104,10 @@ class Interviewing extends Component {
     }
   };
 
+  back = async () => {
+    this.setState({ editId: null });
+  };
+
   render() {
     return (
       <>
@@ -139,48 +143,64 @@ class Interviewing extends Component {
               >
                 Submit
               </button>
+              <button
+                onClick={this.back}
+                class="btn btn-danger spaceOut"
+              >
+                Back To Interview List
+              </button>
             </form>
             <div className="spaceout text-center">
-              <h5 className={this.state.classColor}>&nbsp;{this.state.error}</h5>
+              <h5 className={this.state.classColor}>
+                &nbsp;{this.state.error}
+              </h5>
             </div>
           </div>
         ) : (
-          <div className="intervContainer">
-            {this.state.interviewing.map((val, id) => {
-              return (
-                <div className="interDiv">
-                  <h2>Company: {val.Company}</h2>
+          <>
+            {this.state.interviewing.length > 0 ? (
+              <div className="intervContainer">
+                {this.state.interviewing.map((val, id) => {
+                  return (
+                    <div className="interDiv">
+                      <h2>Company: {val.Company}</h2>
 
-                  <h3>Job title: {val.JobTitle}</h3>
-                  <br />
+                      <h3>Job title: {val.JobTitle}</h3>
+                      <br />
 
-                  <p>Interview Round: {val.RoundOfInterview}</p>
+                      <p>Interview Round: {val.RoundOfInterview}</p>
 
-                  <p>Interview Date: {val.InterviewDate}</p>
-                  <div className="moveRight">
-                    <button
-                      onClick={() => {
-                        this.handleEdit(id);
-                      }}
-                      type="submit"
-                      class="btn btn-primary spaceOut"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => {
-                        this.handleDelete(id);
-                      }}
-                      type="submit"
-                      class="btn btn-danger spaceOut"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                      <p>Interview Date: {val.InterviewDate}</p>
+                      <div className="moveRight">
+                        <button
+                          onClick={() => {
+                            this.handleEdit(id);
+                          }}
+                          type="submit"
+                          class="btn btn-primary spaceOut"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => {
+                            this.handleDelete(id);
+                          }}
+                          type="submit"
+                          class="btn btn-danger spaceOut"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="noInterviews">
+                <h1>No Interviews To Show</h1>
+              </div>
+            )}
+          </>
         )}
       </>
     );

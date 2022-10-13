@@ -12,7 +12,7 @@ class CreateOffer extends Component {
     submitted: false,
     error: "",
     classColor: "",
-    offerExpires: null
+    offerExpires: null,
   };
 
   handleChange = (e) => {
@@ -61,6 +61,7 @@ class CreateOffer extends Component {
 
   render() {
     return (
+      <div className="pad">
       <div className="offerDiv">
         <h1> Create An Offer </h1>
         <form onSubmit={this.handleSubmit}>
@@ -132,13 +133,17 @@ class CreateOffer extends Component {
               <button type="submit" class="btn btn-primary spaceOut">
                 Submit
               </button>
+              <Link to="/viewOffers">
+                <button class="btn btn-danger spaceOut">Return To Offer List</button>
+              </Link>
             </div>
           )}
         </form>
         <div className="spaceout text-center">
           <h3 className={this.state.classColor}>&nbsp;{this.state.error}</h3>
         </div>
-      </div>
+        </div>
+        </div>
     );
   }
 }
