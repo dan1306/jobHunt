@@ -1,5 +1,4 @@
 import React from "react";
-// import Logo from "../../components/Logo/Logo";
 import CreateApplied from "../../components/Applied/CreateApplied";
 
 export default class CreateApplication extends React.Component {

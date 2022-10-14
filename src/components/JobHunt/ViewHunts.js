@@ -58,7 +58,7 @@ class VieweHunts extends Component {
     return (
       <>
         {this.state.huntList.length > 0 ? (
-          <div>
+          <div className="padHuntDiv">
             {this.state.huntList.map((val, id) => {
               return (
                 <div className="huntDiv">

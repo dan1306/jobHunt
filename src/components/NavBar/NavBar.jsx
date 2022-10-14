@@ -56,7 +56,7 @@ export default class NavBar extends Component {
                       <NavDropdown.Divider />
                       <NavDropdown.Item>
                         <Link to="/createInterview" className="rm-underline">
-                          Create Interviewing For
+                          Create An Interviewing
                         </Link>
                       </NavDropdown.Item>
                     </NavDropdown>

@@ -8,7 +8,6 @@ import Applied from "./pages/Applied/Applied";
 import CreateApplication from "./pages/Applied/CreateApplication";
 import Accepted from "./pages/Accepted/Accepted";
 import Offer from "./pages/Offer/Offer";
-import Resume from "./pages/Resume/Resume";
 import InterviewQuestions from "./pages/InterviewQuestions/InterviewQuestions";
 import ViewInterests from "./pages/Interested/ViewInterests";
 import CreateInterest from "./pages/Interested/CreateInterest";
@@ -178,7 +177,6 @@ class App extends Component {
                   }
                 />
 
-                <Route path="/resume" element={<Resume />} />
                 <Route
                   path="/interviewQuestions"
                   element={<InterviewQuestions />}

@@ -168,7 +168,7 @@ class Offer extends Component {
   };
 
   back = async () => {
-    this.setState({ editId: null });
+    this.setState({ editId: null, error: null });
   };
 
   render() {
@@ -227,10 +227,10 @@ class Offer extends Component {
                 Back To Offer List
               </button>
             </form>
-            <div className="spaceout">
-              <h5 className={this.state.classColor}>
+            <div className="spaceout text-center">
+              <h2 className={this.state.classColor}>
                 &nbsp;{this.state.error}
-              </h5>
+              </h2>
             </div>
           </div>
         ) : (

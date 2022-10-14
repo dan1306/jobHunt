@@ -47,13 +47,13 @@ class CreateInterview extends Component {
       } else {
         console.log(fetchResponse);
         await this.setState({
-          error: `Interest Added`,
+          error: `Interview Added`,
           classColor: "sucess-message",
           submitted: true,
         });
       }
     } catch (err) {
-      console.log("Create Interview error", err);
+      console.log( err);
     }
   };
 
@@ -129,7 +129,7 @@ class CreateInterview extends Component {
             )}
           </form>
           <div className="spaceout text-center">
-            <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
+            <h2 className={this.state.classColor}>&nbsp;{this.state.error}</h2>
           </div>
         </div>
       </div>

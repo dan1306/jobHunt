@@ -70,3 +70,8 @@
   font-size: calc(10px + 2vmin);
   color: black;
 }
+
+
+.padHuntDiv{
+  padding: 30px;
+}

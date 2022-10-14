@@ -50,7 +50,7 @@ class CreateHunt extends Component {
         console.log(fetchResponse);
       }
     } catch (err) {
-      console.log("Create Interest error", err);
+      console.log( err);
     }
   };
 
@@ -86,17 +86,17 @@ class CreateHunt extends Component {
                     Submit
                   </button>
                   <Link to="/viewHunts">
-                  <button className="btn btn-danger spaceOut">
-                    Return To Hunt List
-                  </button>
-                </Link>
+                    <button className="btn btn-danger spaceOut">
+                      Return To Hunt List
+                    </button>
+                  </Link>
                 </>
               )}
             </>
           }
         </form>
         <div className="spaceout text-center">
-          <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
+          <h2 className={this.state.classColor}>&nbsp;{this.state.error}</h2>
         </div>
       </div>
     );

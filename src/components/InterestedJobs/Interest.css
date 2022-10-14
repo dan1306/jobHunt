@@ -51,7 +51,7 @@
 
 .intContainer {
   background-color: #f7f7f7;
-  padding: 45px;  
+  padding: 45px;
 }
 
 .interestdivs:nth-child(even) {
@@ -63,7 +63,7 @@
 }
 
 .btn-space {
- padding: 45px;
+  padding: 45px;
 }
 
 .viewJobInterest {
@@ -89,7 +89,7 @@
   background-color: white;
 }
 
-.noInterest{
+.noInterest {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -99,6 +99,6 @@
   color: black;
 }
 
-.pad{
+.pad {
   padding: 20px;
 }

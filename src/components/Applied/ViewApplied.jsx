@@ -98,11 +98,9 @@ class Applied extends Component {
         const fetchResponse = await fetch("/api/applied/edit", data);
         if (!fetchResponse.ok) {
           console.log(fetchResponse);
-          // await this.setState({editId: `Fields can't be empty`, classColor: 'error-message' })
         } else {
           console.log(fetchResponse);
           let newArr = this.state.applications;
-          // console.log(newArr[])
           newArr[this.state.editIntState]["JobDescription"] =
             this.state.editJobDesc;
           await this.setState({
@@ -113,13 +111,13 @@ class Applied extends Component {
           });
         }
       } catch (err) {
-        console.log("Create Interest error", err);
+        console.log( err);
       }
     }
   };
 
   back = async () => {
-    this.setState({ editId: null });
+    this.setState({ editId: null, error: null });
   };
 
   render() {
@@ -178,9 +176,9 @@ class Applied extends Component {
               </button>
             </form>
             <div className="spaceout text-center">
-              <h5 className={this.state.classColor}>
+              <h2 className={this.state.classColor}>
                 &nbsp;{this.state.error}
-              </h5>
+              </h2>
             </div>
           </div>
         ) : (
@@ -192,7 +190,7 @@ class Applied extends Component {
                     {this.state.applications.map((val, id) => {
                       return (
                         <div className="applicationsDiv col-lg-4 col-md-6 col-sm-12">
-                          <h3> {val.JobTitle}</h3>
+                          <h3> {val.JobTitle} At {val.CompanyName}</h3>
                           <br />
                           <p>Date Applied: {val.DateApplied}</p>
 

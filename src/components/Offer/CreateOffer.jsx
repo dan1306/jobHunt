@@ -140,7 +140,7 @@ class CreateOffer extends Component {
           )}
         </form>
         <div className="spaceout text-center">
-          <h3 className={this.state.classColor}>&nbsp;{this.state.error}</h3>
+          <h2 className={this.state.classColor}>&nbsp;{this.state.error}</h2>
         </div>
         </div>
         </div>

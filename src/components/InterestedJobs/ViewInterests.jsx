@@ -117,7 +117,7 @@ class ViewInterests extends Component {
   };
 
   back = async () => {
-    this.setState({ editId: null });
+    this.setState({ editId: null, error: null });
   };
 
   render() {
@@ -178,9 +178,9 @@ class ViewInterests extends Component {
               </Link>
             </form>
             <div className="spaceout text-center">
-              <h5 className={this.state.classColor}>
+              <h2 className={this.state.classColor}>
                 &nbsp;{this.state.error}
-              </h5>
+              </h2>
             </div>
           </div>
         ) : (

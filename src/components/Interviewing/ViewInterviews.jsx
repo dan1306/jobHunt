@@ -52,11 +52,9 @@ class Interviewing extends Component {
       const fetchResponse = await fetch("api/interviewing/edit", data);
       if (!fetchResponse.ok) {
         console.log(fetchResponse);
-        // await this.setState({editId: `Fields can't be empty`, classColor: 'error-message' })
       } else {
         console.log(fetchResponse);
         let newArr = this.state.interviewing;
-        // console.log(newArr[])
         newArr[this.state.editIntState]["InterviewDate"] =
           this.state.InterviewDate;
         newArr[this.state.editIntState]["RoundOfInterview"] =
@@ -105,7 +103,7 @@ class Interviewing extends Component {
   };
 
   back = async () => {
-    this.setState({ editId: null });
+    this.setState({ editId: null, error: null });
   };
 
   render() {
@@ -143,17 +141,14 @@ class Interviewing extends Component {
               >
                 Submit
               </button>
-              <button
-                onClick={this.back}
-                class="btn btn-danger spaceOut"
-              >
+              <button onClick={this.back} class="btn btn-danger spaceOut">
                 Back To Interview List
               </button>
             </form>
             <div className="spaceout text-center">
-              <h5 className={this.state.classColor}>
+              <h2 className={this.state.classColor}>
                 &nbsp;{this.state.error}
-              </h5>
+              </h2>
             </div>
           </div>
         ) : (
@@ -165,7 +160,7 @@ class Interviewing extends Component {
                     <div className="interDiv">
                       <h2>Company: {val.Company}</h2>
 
-                      <h3>Job title: {val.JobTitle}</h3>
+                      <h3>Job Title: {val.JobTitle}</h3>
                       <br />
 
                       <p>Interview Round: {val.RoundOfInterview}</p>

@@ -1,30 +1,38 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
-const huntSchema = new Schema({
+const huntSchema = new Schema(
+  {
     HuntName: { type: String, required: true },
     userId: { type: String },
-    interested: [{
+    interested: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Interested'
-    }],
-    offer:[{
+        ref: "Interested",
+      },
+    ],
+    offer: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Offer'
-    }],
-    interviewing: [{
+        ref: "Offer",
+      },
+    ],
+    interviewing: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Interviewing'
-    }],
-    applied: [{
+        ref: "Interviewing",
+      },
+    ],
+    applied: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Applied'
-    }]
-    
-
-}, {
+        ref: "Applied",
+      },
+    ],
+  },
+  {
     timestamps: true,
-})
+  }
+);
 
-module.exports = mongoose.model("Hunt", huntSchema)
+module.exports = mongoose.model("Hunt", huntSchema);

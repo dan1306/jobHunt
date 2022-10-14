@@ -124,7 +124,7 @@ class CreateInterest extends Component {
               </Link>
             </div>
           ) : (
-            <div >
+            <div>
               <button
                 onClick={this.handleSubmit}
                 type="submit"
@@ -142,7 +142,7 @@ class CreateInterest extends Component {
         </form>
 
         <div className="spaceout text-center">
-          <p className={this.state.classColor}>&nbsp;{this.state.error}</p>
+          <h2 className={this.state.classColor}>&nbsp;{this.state.error}</h2>
         </div>
       </div>
     );
