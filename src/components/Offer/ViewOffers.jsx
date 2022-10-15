@@ -19,7 +19,6 @@ class Offer extends Component {
 
   async componentDidMount() {
     let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
-    console.log(getOffers)
     getOffers = await getOffers.json();
     getOffers.sort((a, b) => {
       return a.PayPerYear - b.PayPerYear;
