@@ -66,7 +66,7 @@ class Offer extends Component {
       console.log(err);
     }
 
-    await this.updateState
+    this.updateState()
   };
 
   render() {
