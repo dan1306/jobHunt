@@ -26,6 +26,8 @@ class Offer extends Component {
     });
     await this.setState({ offers: getOffers, error: "" });
 
+    console.log("daielsss",this.state.offers);
+
 
     for (let i = 0; i < this.state.offers.length; i++) {
       if (this.state.offers[i]["Accepted"]) {
@@ -36,7 +38,7 @@ class Offer extends Component {
         break;
       }
     }
-    console.log("daiel",this.state);
+
   }
 
   handleChange = (e) => {
