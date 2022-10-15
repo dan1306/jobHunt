@@ -35,7 +35,7 @@ class Offer extends Component {
         break;
       }
     }
-    console.log(this.state);
+    console.log("daiel",this.state);
   }
 
   handleChange = (e) => {
