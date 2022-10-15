@@ -24,7 +24,7 @@ class Offer extends Component {
       return a.PayPerYear - b.PayPerYear;
     });
     await this.setState({ offers: getOffers, error: "" });
-    console.log(this.state);
+
 
     for (let i = 0; i < this.state.offers.length; i++) {
       if (this.state.offers[i]["Accepted"]) {
@@ -35,6 +35,7 @@ class Offer extends Component {
         break;
       }
     }
+    console.log(this.state);
   }
 
   handleChange = (e) => {
