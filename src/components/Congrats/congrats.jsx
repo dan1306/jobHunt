@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useDebugValue } from "react";
 import "./Congrats.css";
 
 class Offer extends Component {
@@ -9,6 +9,22 @@ class Offer extends Component {
   };
 
   async componentDidMount() {
+    let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
+    getOffers = await getOffers.json();
+
+    for (let i = 0; i < getOffers.length; i++) {
+      if (getOffers[i]["Accepted"]) {
+        await this.setState({
+          offers: getOffers[i],
+          offerAccepted: true,
+          id: getOffers[i]["_id"],
+        });
+        break;
+      }
+    }
+  }
+
+  updateState = async () => {
     let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
     getOffers = await getOffers.json();
 
@@ -49,6 +65,8 @@ class Offer extends Component {
     } catch (err) {
       console.log(err);
     }
+
+    await this.updateState
   };
 
   render() {
