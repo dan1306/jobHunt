@@ -19,15 +19,12 @@ class Offer extends Component {
 
   async componentDidMount() {
     let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
-    console.log("offers",getOffers);
     getOffers = await getOffers.json();
     getOffers.sort((a, b) => {
       return a.PayPerYear - b.PayPerYear;
     });
     await this.setState({ offers: getOffers, error: "" });
-
-    console.log("daielsss",this.state.offers);
-
+    console.log(this.state);
 
     for (let i = 0; i < this.state.offers.length; i++) {
       if (this.state.offers[i]["Accepted"]) {
@@ -38,7 +35,6 @@ class Offer extends Component {
         break;
       }
     }
-
   }
 
   handleChange = (e) => {
