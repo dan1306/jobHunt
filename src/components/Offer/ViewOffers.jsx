@@ -17,26 +17,6 @@ class Offer extends Component {
     offerAcc: null,
   };
 
-  // async componentDidMount() {
-  //   let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
-  //   getOffers = await getOffers.json();
-  //   getOffers.sort((a, b) => {
-  //     return a.PayPerYear - b.PayPerYear;
-  //   });
-  //   await this.setState({ offers: getOffers, error: "" });
-  //   console.log(this.state);
-
-  //   for (let i = 0; i < getOffers.length; i++) {
-  //     if (getOffers[i]["Accepted"]) {
-  //       await this.setState({
-  //         acceptedOffer: true,
-  //         offerAcc: "An Offer Has Been Accepted",
-  //       });
-  //       break;
-  //     }
-  //   }
-  // }
-
   async componentDidMount() {
     let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
     getOffers = await getOffers.json();
@@ -46,8 +26,8 @@ class Offer extends Component {
     await this.setState({ offers: getOffers, error: "" });
     console.log(this.state);
 
-    for (let i = 0; i < this.state.offers.length; i++) {
-      if (this.state.offers[i]["Accepted"]) {
+    for (let i = 0; i < getOffers.length; i++) {
+      if (getOffers[i]["Accepted"]) {
         await this.setState({
           acceptedOffer: true,
           offerAcc: "An Offer Has Been Accepted",
@@ -56,6 +36,29 @@ class Offer extends Component {
       }
     }
   }
+
+
+  // async componentDidMount() {
+  //   let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
+  //   getOffers = await getOffers.json();
+  //   getOffers.sort((a, b) => {
+  //     return a.PayPerYear - b.PayPerYear;
+  //   });
+  //   await this.setState({ offers: getOffers, error: "" });
+  //   console.log(this.state);
+
+  //   for (let i = 0; i < this.state.offers.length; i++) {
+  //     if (this.state.offers[i]["Accepted"]) {
+  //       await this.setState({
+  //         acceptedOffer: true,
+  //         offerAcc: "An Offer Has Been Accepted",
+  //       });
+  //       break;
+  //     }
+  //   }
+  // }
+
+
 
   // async componentDidMount() {
   //   let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
