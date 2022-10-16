@@ -58,7 +58,7 @@ class Offer extends Component {
         {this.state.offerAccepted["Company"]}
         {this.state.offerAccepted ? (
           <div className="showCongrats">
-            <h1 className="text-center"> 🎊Congratultaions🎊 </h1>
+            <h1 className="text-center"> 🎊Congratulations🎊 </h1>
             <div className="congratsMessage">
               <p className="text-center">
                 {" "}
