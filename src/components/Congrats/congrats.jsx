@@ -24,22 +24,6 @@ class Offer extends Component {
     }
   }
 
-  updateState = async () => {
-    let getOffers = await fetch(`/api/offer/getOffers/${this.props.huntId}`);
-    getOffers = await getOffers.json();
-
-    for (let i = 0; i < getOffers.length; i++) {
-      if (getOffers[i]["Accepted"]) {
-        await this.setState({
-          offers: getOffers[i],
-          offerAccepted: true,
-          id: getOffers[i]["_id"],
-        });
-        break;
-      }
-    }
-  }
-
   declineoffer = async (id) => {
     try {
       const data = {
@@ -66,7 +50,6 @@ class Offer extends Component {
       console.log(err);
     }
 
-    this.updateState()
   };
 
   render() {
