@@ -95,14 +95,7 @@ class CreateApplication extends Component {
             </div>
             <div className="form-group spaceOut">
               <label>Job Description:</label>
-              {/* <input
-              type="text"
-              className="form-control"
-              name="JobDescription"
-              value={this.state.JobDescription}
-              onChange={this.handleChange}
-              required
-              /> */}
+   
               <div className="editor">
                 <CKEditor
                   onReady={(editor) => {
