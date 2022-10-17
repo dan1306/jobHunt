@@ -12,6 +12,8 @@ dotenv, express, ckeditor5
 
 Link to application https://jonhuntapp.herokuapp.com/viewHunts
 
+Trelo Board: https://trello.com/b/jcKs5lw4/job-hunt
+
 The first thing a user must do is login or sign up for the application. Without doing either of those two, users will note have access to the full functionality of the app.
 
 Once a user is logged in, they will have access to create a job hunt via links in the nav. Each hunt a user creates is like a folder which holds all the progress for the Job they are hoping to get. 
